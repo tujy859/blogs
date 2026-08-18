@@ -1,10 +1,38 @@
-title: My Blog
+name: My Blog
 description: my blogs for learning and recording
-theme: jekyll-theme-cayman
-
-# Optional: change these
-email: ""
-logo: ""
-
+baseurl: ""
+url: "https://tujy859.github.io"
+theme: minimal-mistakes-jekyll
 markdown: kramdown
 paginate: 5
+github_username: tujy859
+
+# Plugins and i18n
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-multiple-languages-plugin
+
+languages: ["en", "zh"]
+default_lang: "en"
+
+# Minimal Mistakes basic options
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+exclude:
+  - "node_modules"
+  - "vendor/bundle"
+  - "Gemfile"
+  - "Gemfile.lock"
+
+author:
+  name: "Jinying Tu"
+
+social:
+  github: "https://github.com/tujy859"

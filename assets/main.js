@@ -1,15 +1,37 @@
-// Simple per-browser read counter stored in localStorage
+// CountAPI-based read counter with fallback to localStorage
 document.addEventListener('DOMContentLoaded', function(){
   try{
-    const pageUrl = window.location.pathname;
-    // only run on post pages (simple heuristic: path contains /YYYY/ or /posts/ or _posts rendered under /)
-    // We'll run on any page that contains #read-count element.
     const rc = document.getElementById('read-count');
     if(!rc) return;
-    const key = 'blog-readcount:' + pageUrl;
-    let count = Number(localStorage.getItem(key) || 0);
-    count += 1;
-    localStorage.setItem(key, String(count));
-    rc.innerText = count;
-  }catch(e){console.error(e)}
+
+    const pageUrl = window.location.pathname; // use pathname as key (unique per post)
+    const namespace = 'tujy859-blogs';
+    const key = encodeURIComponent(pageUrl);
+    const countApiUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+
+    // Try CountAPI first
+    fetch(countApiUrl)
+      .then(response => response.json())
+      .then(data => {
+        if(data && (typeof data.value !== 'undefined')){
+          rc.innerText = data.value;
+        }else{
+          // fallback to local storage
+          fallbackCount();
+        }
+      }).catch(err => {
+        // fallback
+        fallbackCount();
+      });
+
+    function fallbackCount(){
+      try{
+        const lskey = 'blog-readcount:' + pageUrl;
+        let count = Number(localStorage.getItem(lskey) || 0);
+        count += 1;
+        localStorage.setItem(lskey, String(count));
+        rc.innerText = count;
+      }catch(e){ rc.innerText = '0'; }
+    }
+  }catch(e){console.error(e)};
 });
