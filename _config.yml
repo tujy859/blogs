@@ -1,11 +1,10 @@
 name: My Blog
-description: my blogs for learning and recording
-baseurl: ""
+title: My Blog
+description: "My blogs for learning and recording"
+baseurl: "/blogs"
 url: "https://tujy859.github.io"
-theme: minimal-mistakes-jekyll
-markdown: kramdown
-paginate: 5
 github_username: tujy859
+future: true
 
 # Plugins and i18n
 plugins:
@@ -17,13 +16,17 @@ plugins:
 languages: ["en", "zh"]
 default_lang: "en"
 
-# Minimal Mistakes basic options
 defaults:
   - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
+      lang: "en"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
 
 exclude:
   - "node_modules"
