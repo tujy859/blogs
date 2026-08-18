@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
+    <meta name="theme-color" content="#0ea5a4">
+  </head>
+  <body data-page-url="{{ page.url }}">
+    {% include header.html %}
+
+    <main class="container">
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+
+    <script src="{{ '/assets/main.js' | relative_url }}"></script>
+  </body>
+</html>
