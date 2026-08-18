@@ -4,17 +4,14 @@ description: "My blogs for learning and recording"
 baseurl: "/blogs"
 url: "https://tujy859.github.io"
 github_username: tujy859
+permalink: /:year/:month/:day/:title/
 future: true
 
-# Plugins and i18n
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-multiple-languages-plugin
-
-languages: ["en", "zh"]
-default_lang: "en"
 
 defaults:
   - scope:
@@ -22,7 +19,6 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      lang: "en"
   - scope:
       path: ""
     values:
