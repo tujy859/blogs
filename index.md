@@ -9,7 +9,7 @@ title: Home
     <p class="hero-lead">{{ site.description }}</p>
     <p class="hero-intro">Hello! I'm <strong>Jinying Tu</strong>. Here I document my coding notes, projects, and technical insights. Explore my latest and recommended articles below.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="{{ '/all-posts/' | relative_url }}">Explore All Blogs →</a>
+      <a class="btn btn-primary" href="{{ '/all-posts/' | relative_url }}">Explore All Blogs ({{ site.posts | size }}) →</a>
     </div>
   </div>
 </section>
@@ -40,11 +40,11 @@ title: Home
 
 <section class="section-block">
   <div class="section-header">
-    <h2 class="section-title">📝 Latest Posts</h2>
+    <h2 class="section-title">📝 All Recent Posts</h2>
     <a href="{{ '/all-posts/' | relative_url }}" class="section-more">View all ({{ site.posts | size }}) →</a>
   </div>
   <div class="post-list-vertical">
-    {% for post in site.posts limit:6 %}
+    {% for post in site.posts %}
       <a href="{{ post.url | relative_url }}" class="post-item-link">
         <div class="post-item">
           <div class="post-item-main">
