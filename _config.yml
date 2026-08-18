@@ -1,0 +1,10 @@
+title: My Blog
+description: my blogs for learning and recording
+theme: jekyll-theme-cayman
+
+# Optional: change these
+email: ""
+logo: ""
+
+markdown: kramdown
+paginate: 5
