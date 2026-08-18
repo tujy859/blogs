@@ -28,8 +28,14 @@ jobs:
           ruby-version: 3.1
           bundler-cache: true
 
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config set --local path 'vendor/bundle'
+          bundle install
+
       - name: Build the site with Jekyll
-        run: bundle exec jekyll build --destination _site
+        run: bundle exec jekyll build --trace --destination _site
 
       - name: Upload artifact for deployment
         uses: actions/upload-pages-artifact@v3
