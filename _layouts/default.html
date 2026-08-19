@@ -1,16 +1,19 @@
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title and page.title != 'Home' %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <title>{% if page.title and page.title != 'Home' %}{{ page.title }} | {% endif %}{{ site.title }} — 🌌 七夕特别版</title>
     <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#0ea5e9">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#130e24">
   </head>
-  <body data-page-url="{{ page.url }}">
+  <body data-page-url="{{ page.url }}" class="qixi-body">
+    <!-- Dynamic Starry Sky & Meteors Canvas -->
+    <canvas id="starry-canvas"></canvas>
+
     {% include header.html %}
 
     <main class="container main-content">
@@ -18,6 +21,33 @@
     </main>
 
     {% include footer.html %}
+
+    <!-- Romantic Love Letter Modal -->
+    <div id="love-letter-modal" class="love-modal" style="display:none;" aria-hidden="true">
+      <div class="love-modal-backdrop" onclick="closeLoveLetter()"></div>
+      <div class="love-modal-content">
+        <button class="love-modal-close" onclick="closeLoveLetter()" aria-label="关闭">✕</button>
+        <div class="love-letter-header">
+          <div class="heart-stamp">💌</div>
+          <div class="love-letter-badge">2026.08.19 · 农历七月初七 七夕节</div>
+          <h2 class="love-letter-title">致我最珍爱的人</h2>
+        </div>
+        <div class="love-letter-body">
+          <p class="letter-verse">“金风玉露一相逢，便胜却人间无数。”</p>
+          <p>今天是2026年8月19日，七夕佳节。在这个星河璀璨的特别夜晚，想把所有的真心与柔情都毫无保留地寄托在这些文字里给你。</p>
+          <p>从相识、相知到相伴，你的出现就像漫天星夜中最温柔的光芒，照亮了我生命里每一个平凡或闪耀的角落。无论是清晨并肩漫步的微风，还是深夜分享欢喜的畅谈，有你的每一秒，都是我心底最甜的珍藏。</p>
+          <div class="letter-quote-box">
+            <p class="en-quote">“Love you to the moon and back.”</p>
+            <p class="cn-quote">跨越星河三万里，愿岁岁年年，朝朝暮暮，皆有你相伴。</p>
+          </div>
+          <p>愿我们未来的日子，永远充满彼此眼中的星光，携手走过春华秋实，看遍世间烟火。</p>
+          <div class="letter-signature">
+            <p class="sign-text">七夕快乐，愿爱意永恒 💖</p>
+            <p class="sign-date">2026年8月19日 · 浪漫七夕</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="{{ '/assets/main.js' | relative_url }}"></script>
   </body>
