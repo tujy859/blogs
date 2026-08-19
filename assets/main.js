@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initStarryCanvas();
   initHeartClicks();
   initReadCount();
+  initWishCount();
 });
 
 /* Canvas Starry Sky & Meteors */
@@ -137,14 +138,74 @@ function createFloatingParticle(x, y, icon) {
   }, 1600);
 }
 
-/* Wish Counter & Love Letter Interaction */
+/* Wish Counter with CountAPI & LocalStorage Fallback */
+const WISH_NAMESPACE = 'tujy859-blogs';
+const WISH_KEY = 'qixi-romantic-wish';
+const COUNTAPI_GET_URL = `https://api.countapi.xyz/get/${WISH_NAMESPACE}/${WISH_KEY}`;
+const COUNTAPI_HIT_URL = `https://api.countapi.xyz/hit/${WISH_NAMESPACE}/${WISH_KEY}`;
+const LS_WISH_KEY = 'blog-wishcount:qixi';
+
 let wishCount = 0;
-window.triggerRomanticWish = function() {
-  wishCount += 1;
+
+function initWishCount() {
   const countEl = document.getElementById('wish-count');
+  if (!countEl) return;
+
+  // 1. Load cached value from localStorage for instant render
+  try {
+    const cached = localStorage.getItem(LS_WISH_KEY);
+    if (cached !== null) {
+      wishCount = parseInt(cached, 10) || 0;
+      countEl.innerText = wishCount;
+    }
+  } catch (e) {}
+
+  // 2. Fetch remote global count from CountAPI
+  fetch(COUNTAPI_GET_URL)
+    .then(res => res.json())
+    .then(data => {
+      if (data && typeof data.value !== 'undefined') {
+        wishCount = data.value;
+        countEl.innerText = wishCount;
+        try {
+          localStorage.setItem(LS_WISH_KEY, String(wishCount));
+        } catch (e) {}
+      }
+    })
+    .catch(() => {
+      // Retain localStorage fallback if offline/failed
+    });
+}
+
+window.triggerRomanticWish = function() {
+  const countEl = document.getElementById('wish-count');
+  
+  // Optimistic UI update immediately
+  wishCount += 1;
   if (countEl) {
     countEl.innerText = wishCount;
   }
+  try {
+    localStorage.setItem(LS_WISH_KEY, String(wishCount));
+  } catch (e) {}
+
+  // Sync to CountAPI asynchronously
+  fetch(COUNTAPI_HIT_URL)
+    .then(res => res.json())
+    .then(data => {
+      if (data && typeof data.value !== 'undefined') {
+        wishCount = data.value;
+        if (countEl) {
+          countEl.innerText = wishCount;
+        }
+        try {
+          localStorage.setItem(LS_WISH_KEY, String(wishCount));
+        } catch (e) {}
+      }
+    })
+    .catch(err => {
+      console.warn('CountAPI sync failed, falling back to localStorage.', err);
+    });
   
   // Burst particles around button
   const btn = document.getElementById('make-wish-btn');
