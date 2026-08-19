@@ -2,7 +2,7 @@ name: My Blog
 title: My Blog
 description: "My blogs for learning and recording"
 baseurl: ""
-url: "https://tujy859.github.io"
+url: "https://tujinying.me"
 github_username: tujy859
 permalink: /:year/:month/:day/:title/
 future: true
