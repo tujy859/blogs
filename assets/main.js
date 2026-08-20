@@ -138,12 +138,11 @@ function createFloatingParticle(x, y, icon) {
   }, 1600);
 }
 
-/* Wish Counter with CountAPI & LocalStorage Fallback */
-const WISH_NAMESPACE = 'tujy859-blogs';
-const WISH_KEY = 'qixi-romantic-wish';
-const COUNTAPI_GET_URL = `https://api.countapi.xyz/get/${WISH_NAMESPACE}/${WISH_KEY}`;
-const COUNTAPI_HIT_URL = `https://api.countapi.xyz/hit/${WISH_NAMESPACE}/${WISH_KEY}`;
+/* Wish Counter with Cloudflare Workers & LocalStorage Fallback */
+const CF_WISH_URL = 'https://counter.tujy859.workers.dev/love';
+const CF_VISIT_URL = 'https://counter.tujy859.workers.dev/visit';
 const LS_WISH_KEY = 'blog-wishcount:qixi';
+const LS_VISIT_KEY = 'blog-visitcount:global';
 
 let wishCount = 0;
 
@@ -160,12 +159,12 @@ function initWishCount() {
     }
   } catch (e) {}
 
-  // 2. Fetch remote global count from CountAPI
-  fetch(COUNTAPI_GET_URL)
+  // 2. Fetch remote global count from Cloudflare Worker (GET - read only)
+  fetch(CF_WISH_URL, { method: 'GET' })
     .then(res => res.json())
     .then(data => {
-      if (data && typeof data.value !== 'undefined') {
-        wishCount = data.value;
+      if (data && typeof data.count !== 'undefined') {
+        wishCount = data.count;
         countEl.innerText = wishCount;
         try {
           localStorage.setItem(LS_WISH_KEY, String(wishCount));
@@ -189,12 +188,12 @@ window.triggerRomanticWish = function() {
     localStorage.setItem(LS_WISH_KEY, String(wishCount));
   } catch (e) {}
 
-  // Sync to CountAPI asynchronously
-  fetch(COUNTAPI_HIT_URL)
+  // Sync to Cloudflare Worker asynchronously (POST - increment)
+  fetch(CF_WISH_URL, { method: 'POST' })
     .then(res => res.json())
     .then(data => {
-      if (data && typeof data.value !== 'undefined') {
-        wishCount = data.value;
+      if (data && typeof data.count !== 'undefined') {
+        wishCount = data.count;
         if (countEl) {
           countEl.innerText = wishCount;
         }
@@ -204,7 +203,7 @@ window.triggerRomanticWish = function() {
       }
     })
     .catch(err => {
-      console.warn('CountAPI sync failed, falling back to localStorage.', err);
+      console.warn('Cloudflare Worker sync failed, falling back to localStorage.', err);
     });
   
   // Burst particles around button
@@ -254,17 +253,34 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-/* Read Counter */
+/* Read / Total Visit Counter */
 function initReadCount() {
+  const rc = document.getElementById('read-count');
+  const footerRc = document.getElementById('site-visit-count');
+  if (!rc && !footerRc) return;
+
+  // 1. Instant render from localStorage
   try {
-    const rc = document.getElementById('read-count');
-    if (!rc) return;
-    const pageUrl = window.location.pathname;
-    const lskey = 'blog-readcount:' + pageUrl;
-    let count = Number(localStorage.getItem(lskey) || 0) + 1;
-    localStorage.setItem(lskey, String(count));
-    rc.innerText = count;
-  } catch(e) {
-    console.error(e);
-  }
+    const cached = localStorage.getItem(LS_VISIT_KEY);
+    if (cached !== null) {
+      if (rc) rc.innerText = cached;
+      if (footerRc) footerRc.innerText = cached;
+    }
+  } catch(e) {}
+
+  // 2. Fetch and increment global visits from Cloudflare Worker
+  fetch(CF_VISIT_URL)
+    .then(res => res.json())
+    .then(data => {
+      if (data && typeof data.count !== 'undefined') {
+        if (rc) rc.innerText = data.count;
+        if (footerRc) footerRc.innerText = data.count;
+        try {
+          localStorage.setItem(LS_VISIT_KEY, String(data.count));
+        } catch(e) {}
+      }
+    })
+    .catch(err => {
+      console.warn('Total visit count sync failed.', err);
+    });
 }
