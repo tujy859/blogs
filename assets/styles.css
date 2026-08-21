@@ -312,6 +312,7 @@ html, body {
 .romantic-actions {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1.2rem;
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
@@ -362,6 +363,36 @@ html, body {
   border-radius: 12px;
   font-size: 0.85rem;
   margin-left: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Wish Source Badge (Cloud vs Local) */
+.wish-source-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #fef08a;
+  background: rgba(251, 191, 36, 0.2);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  padding: 0.05rem 0.4rem;
+  border-radius: 8px;
+  margin-left: 0.35rem;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  transition: var(--transition);
+}
+
+.wish-source-badge.local {
+  color: #fda4af;
+  background: rgba(244, 63, 94, 0.2);
+  border-color: rgba(244, 63, 94, 0.35);
+}
+
+.wish-source-badge.cloud {
+  color: #fef08a;
+  background: rgba(251, 191, 36, 0.2);
+  border-color: rgba(251, 191, 36, 0.35);
 }
 
 /* Quote Card inside Hero */
@@ -515,15 +546,16 @@ html, body {
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: var(--transition);
 }
 
 .post-item:hover {
-  background: rgba(30, 22, 58, 0.85);
+  background: rgba(36, 24, 66, 0.85);
   border-color: var(--border-qixi);
-  transform: translateX(6px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .post-item-main {
@@ -531,8 +563,8 @@ html, body {
 }
 
 .post-item-title {
-  margin: 0 0 0.4rem 0;
-  font-size: 1.05rem;
+  margin: 0 0 0.35rem 0;
+  font-size: 1.08rem;
   font-weight: 600;
   color: var(--text-primary);
 }
@@ -540,7 +572,8 @@ html, body {
 .post-item-excerpt {
   margin: 0;
   font-size: 0.88rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
 .post-item-tags {
@@ -551,11 +584,12 @@ html, body {
 }
 
 .tag-badge {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--text-rose);
   font-size: 0.75rem;
-  padding: 0.15rem 0.45rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 4px;
+  border: 1px solid rgba(244, 63, 94, 0.2);
 }
 
 .post-item-meta {
@@ -565,14 +599,122 @@ html, body {
   text-align: right;
 }
 
-/* Love Letter Modal */
+/* Single Post Page */
+.post-single {
+  background: rgba(22, 16, 46, 0.75);
+  border: 1px solid var(--border-qixi);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.post-header {
+  margin-bottom: 1.5rem;
+}
+
+.post-header .post-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0.8rem 0 0 0;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.post-header .post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.post-reads {
+  color: var(--primary-rose);
+}
+
+.post-divider {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(244, 63, 94, 0.4), rgba(168, 85, 247, 0.4), transparent);
+  margin: 1.5rem 0 2rem 0;
+}
+
+.post-body {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+}
+
+.post-body a {
+  color: var(--primary-rose);
+  text-decoration: underline;
+}
+
+.post-body h2, .post-body h3 {
+  color: var(--text-primary);
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.post-body code {
+  background: rgba(244, 63, 94, 0.12);
+  color: #fbcfe8;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.post-footer {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-qixi);
+}
+
+.back-link {
+  color: var(--primary-rose);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.back-link:hover {
+  color: #fff;
+}
+
+/* Page Header (All Posts) */
+.page-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border-qixi);
+}
+
+.page-title {
+  margin: 0 0 0.4rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.page-subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Romantic Love Letter Modal */
 .love-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1000;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -585,237 +727,172 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 7, 18, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(7, 9, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeIn 0.3s ease;
 }
 
 .love-modal-content {
   position: relative;
-  background: linear-gradient(160deg, #1e153a 0%, #120e24 100%);
-  border: 1px solid rgba(244, 63, 94, 0.4);
+  z-index: 2;
+  background: linear-gradient(160deg, #23173d 0%, #150f29 50%, #1e1236 100%);
+  border: 1px solid rgba(251, 113, 133, 0.4);
   border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
   max-width: 620px;
   width: 100%;
-  max-height: 85vh;
+  max-height: 88vh;
   overflow-y: auto;
-  padding: 2.8rem 2.2rem;
   box-shadow: 
     0 25px 60px rgba(0, 0, 0, 0.7),
-    0 0 50px rgba(244, 63, 94, 0.25);
-  z-index: 1001;
-  animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes modalPop {
-  0% { transform: scale(0.85); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+    0 0 50px rgba(244, 63, 94, 0.25),
+    inset 0 0 30px rgba(168, 85, 247, 0.1);
+  animation: scaleUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .love-modal-close {
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  width: 32px;
-  height: 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
   transition: var(--transition);
 }
 
 .love-modal-close:hover {
-  background: var(--primary-pink);
+  background: rgba(244, 63, 94, 0.3);
   color: #fff;
+  transform: rotate(90deg);
 }
 
 .love-letter-header {
   text-align: center;
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
 }
 
 .heart-stamp {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  animation: beatHeart 1.5s infinite;
-}
-
-@keyframes beatHeart {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  animation: pulseBadge 2s infinite;
 }
 
 .love-letter-badge {
   display: inline-block;
-  font-size: 0.85rem;
-  color: var(--starlight-gold);
-  margin-bottom: 0.6rem;
-  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  color: var(--primary-rose);
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
 }
 
 .love-letter-title {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-family: 'Ma Shan Zheng', 'Inter', cursive, sans-serif;
+  font-size: 2rem;
+  color: #ffe4e6;
   margin: 0;
-  background: linear-gradient(135deg, #fff 0%, #fda4af 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
 }
 
 .love-letter-body {
-  color: #e2e8f0;
+  color: #f1f5f9;
   font-size: 1rem;
   line-height: 1.9;
 }
 
 .letter-verse {
-  font-family: 'Ma Shan Zheng', 'Inter', cursive, serif;
+  font-family: 'Ma Shan Zheng', cursive;
   font-size: 1.25rem;
   color: #fed7aa;
   text-align: center;
-  margin: 0 0 1.5rem 0;
-  padding: 0.8rem;
-  background: rgba(251, 191, 36, 0.08);
-  border-radius: var(--radius-sm);
-  border-left: 3px solid var(--starlight-gold);
+  margin-bottom: 1.5rem;
 }
 
 .letter-quote-box {
-  background: rgba(244, 63, 94, 0.12);
-  border: 1px dashed rgba(244, 63, 94, 0.4);
-  border-radius: var(--radius-md);
-  padding: 1.2rem;
-  text-align: center;
+  background: rgba(14, 10, 29, 0.5);
+  border-left: 3px solid var(--primary-pink);
+  padding: 1rem 1.2rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   margin: 1.5rem 0;
 }
 
 .letter-quote-box .en-quote {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #f43f5e;
+  font-size: 1.4rem;
+  color: var(--primary-rose);
   margin: 0 0 0.3rem 0;
 }
 
 .letter-quote-box .cn-quote {
   font-size: 0.95rem;
-  color: #fda4af;
+  color: #fed7aa;
   margin: 0;
 }
 
 .letter-signature {
-  text-align: right;
   margin-top: 2rem;
+  text-align: right;
+  border-top: 1px dashed rgba(244, 63, 94, 0.2);
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.letter-signature .sign-text {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #fda4af;
-  margin: 0 0 0.2rem 0;
+.sign-text {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 1.2rem;
+  color: var(--text-rose);
+  margin: 0 0 0.3rem 0;
 }
 
-.letter-signature .sign-date {
-  font-size: 0.85rem;
+.sign-date {
+  font-size: 0.82rem;
   color: var(--text-muted);
   margin: 0;
 }
 
-/* Floating Heart Particle on Click */
+/* Floating Particles */
 .floating-heart-particle {
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-  user-select: none;
-  animation: floatUpAndFade 1.6s forwards ease-out;
+  font-size: 1.5rem;
+  animation: floatUpParticle 1.6s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
 }
 
-@keyframes floatUpAndFade {
+@keyframes floatUpParticle {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg) scale(0.6);
   }
   50% {
     opacity: 0.9;
-    transform: translate(calc(-50% + var(--dx)), calc(-50% - 60px)) scale(1.3) rotate(var(--rot));
+    transform: translate(var(--dx), -70px) rotate(var(--rot)) scale(1.2);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% + var(--dx) * 1.5), calc(-50% - 130px)) scale(1.5) rotate(calc(var(--rot) * 2));
+    transform: translate(var(--dx), -140px) rotate(var(--rot)) scale(0.8);
   }
 }
 
-/* Single Post Page */
-.post-single {
-  background: rgba(22, 16, 44, 0.7);
-  border: 1px solid var(--border-qixi);
-  border-radius: var(--radius-lg);
-  padding: 2.8rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(16px);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.post-header .post-title {
-  font-size: 2.1rem;
-  font-weight: 700;
-  margin: 0.75rem 0 0 0;
-  line-height: 1.3;
-}
-
-.post-header .post-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  flex-wrap: wrap;
-}
-
-.post-divider {
-  border: 0;
-  height: 1px;
-  background: var(--border-qixi);
-  margin: 1.5rem 0 2rem 0;
-}
-
-.post-body {
-  font-size: 1.05rem;
-  line-height: 1.85;
-  color: #e2e8f0;
-}
-
-.post-body a {
-  color: var(--primary-rose);
-  text-decoration: underline;
-}
-
-.post-body code {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-family: monospace;
-}
-
-.post-nav {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.nav-link {
-  color: var(--primary-rose);
-  text-decoration: none;
-  font-weight: 500;
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* Footer */
@@ -838,6 +915,29 @@ html, body {
 
 .footer-copyright strong {
   color: #fdf2f8;
+}
+
+/* Footer Total Site Visits Display */
+.footer-site-pv {
+  margin-top: 0.6rem;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  padding: 0.25rem 0.85rem;
+  border-radius: 20px;
+}
+
+.footer-pv-icon {
+  font-size: 0.95rem;
+}
+
+.footer-site-pv #site-visit-count {
+  color: #fef08a;
+  font-weight: 600;
 }
 
 @media (max-width: 680px) {
