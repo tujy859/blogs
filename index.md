@@ -45,7 +45,7 @@ title: 七夕专属浪漫 · Love you to the moon and back
         <span class="btn-icon">💌</span> 打开专属七夕情书
       </button>
       <button class="btn btn-qixi-wish" id="make-wish-btn" onclick="triggerRomanticWish()">
-        <span class="btn-icon">✨</span> 点亮漫天星愿 <span id="wish-count-badge" class="wish-counter">❤️ +<span id="wish-count">0</span></span>
+        <span class="btn-icon">✨</span> 点亮漫天星愿 <span id="wish-count-badge" class="wish-counter">❤️ +<span id="wish-count">0</span> <span id="wish-source-badge" class="wish-source-badge">云端</span></span>
       </button>
     </div>
 

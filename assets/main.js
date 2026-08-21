@@ -116,8 +116,8 @@ function initStarryCanvas() {
 function initHeartClicks() {
   const heartIcons = ['❤️', '💖', '✨', '🌸', '💕', '🌙', '💫', '🌹'];
   document.addEventListener('click', function(e) {
-    // Don't trigger if clicked on close button or modal backdrop
-    if (e.target.closest('.love-modal-close')) return;
+    // Don't trigger if clicked on close button or make-wish button
+    if (e.target.closest('.love-modal-close') || e.target.closest('#make-wish-btn')) return;
 
     createFloatingParticle(e.clientX, e.clientY, heartIcons[Math.floor(Math.random() * heartIcons.length)]);
   });
@@ -146,6 +146,22 @@ const LS_VISIT_KEY = 'blog-visitcount:global';
 
 let wishCount = 0;
 
+function updateWishSourceBadge(isCloud) {
+  const badge = document.getElementById('wish-source-badge');
+  if (!badge) return;
+  if (isCloud) {
+    badge.innerText = '云端';
+    badge.classList.remove('local');
+    badge.classList.add('cloud');
+    badge.title = '数据已实时同步至云端计数服务';
+  } else {
+    badge.innerText = '本地';
+    badge.classList.remove('cloud');
+    badge.classList.add('local');
+    badge.title = '当前为本地离线/容灾缓存计数';
+  }
+}
+
 function initWishCount() {
   const countEl = document.getElementById('wish-count');
   if (!countEl) return;
@@ -156,30 +172,36 @@ function initWishCount() {
     if (cached !== null) {
       wishCount = parseInt(cached, 10) || 0;
       countEl.innerText = wishCount;
+      updateWishSourceBadge(false);
     }
   } catch (e) {}
 
-  // 2. Fetch remote global count from Cloudflare Worker (GET - read only)
+  // 2. Fetch remote global count from Cloudflare Worker (GET - strictly read only, no increment)
   fetch(CF_WISH_URL, { method: 'GET' })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
     .then(data => {
       if (data && typeof data.count !== 'undefined') {
         wishCount = data.count;
         countEl.innerText = wishCount;
+        updateWishSourceBadge(true);
         try {
           localStorage.setItem(LS_WISH_KEY, String(wishCount));
         } catch (e) {}
       }
     })
-    .catch(() => {
-      // Retain localStorage fallback if offline/failed
+    .catch(err => {
+      console.warn('Cloudflare Worker wish fetch failed, using local storage fallback.', err);
+      updateWishSourceBadge(false);
     });
 }
 
 window.triggerRomanticWish = function() {
   const countEl = document.getElementById('wish-count');
   
-  // Optimistic UI update immediately
+  // Optimistic UI update immediately on explicit button click only
   wishCount += 1;
   if (countEl) {
     countEl.innerText = wishCount;
@@ -190,13 +212,17 @@ window.triggerRomanticWish = function() {
 
   // Sync to Cloudflare Worker asynchronously (POST - increment)
   fetch(CF_WISH_URL, { method: 'POST' })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
     .then(data => {
       if (data && typeof data.count !== 'undefined') {
         wishCount = data.count;
         if (countEl) {
           countEl.innerText = wishCount;
         }
+        updateWishSourceBadge(true);
         try {
           localStorage.setItem(LS_WISH_KEY, String(wishCount));
         } catch (e) {}
@@ -204,6 +230,7 @@ window.triggerRomanticWish = function() {
     })
     .catch(err => {
       console.warn('Cloudflare Worker sync failed, falling back to localStorage.', err);
+      updateWishSourceBadge(false);
     });
   
   // Burst particles around button
@@ -270,7 +297,10 @@ function initReadCount() {
 
   // 2. Fetch and increment global visits from Cloudflare Worker
   fetch(CF_VISIT_URL)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
     .then(data => {
       if (data && typeof data.count !== 'undefined') {
         if (rc) rc.innerText = data.count;
