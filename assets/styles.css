@@ -880,6 +880,9 @@ me (Only active inside body.qixi-body) */
 }
 
 body.qixi-body {
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 8px;
   background-color: #080b16;
   background-image: 
     radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),
@@ -915,25 +918,34 @@ body.qixi-body .site-header {
   padding: 0.8rem 1.4rem;
   background: rgba(26, 20, 51, 0.6);
   border: 1px solid rgba(244, 63, 94, 0.25);
-  border-radius: var(--radius-md);
+  border-radius: 16px;
   backdrop-filter: blur(10px);
 }
 
 .archive-back-link {
-  color: #38bdf8;
+  color: #fda4af;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.92rem;
-  transition: var(--transition);
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  transition: all 0.2s ease;
 }
 
 .archive-back-link:hover {
+  background: rgba(244, 63, 94, 0.3);
   color: #fff;
 }
 
 .archive-badge {
   font-size: 0.85rem;
-  color: #fb7185;
+  color: #fde047;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
   font-weight: 500;
 }
 
@@ -1078,7 +1090,7 @@ body.qixi-body .site-header {
   line-height: 1.8;
 }
 
-/* Qixi Action Buttons */
+/* Qixi Action Buttons - Capsule Rounded (Pill Shaped) */
 .romantic-actions {
   display: flex;
   justify-content: center;
@@ -1087,38 +1099,81 @@ body.qixi-body .site-header {
   flex-wrap: wrap;
 }
 
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
 .btn-qixi-letter {
-  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
-  color: #fff;
-  border: 1px solid rgba(251, 113, 133, 0.5);
-  box-shadow: 0 0 25px rgba(225, 29, 72, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px !important;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%);
+  color: #ffffff;
+  border: 1px solid rgba(251, 113, 133, 0.4);
+  box-shadow: 0 6px 25px rgba(244, 63, 94, 0.45);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-qixi-letter:hover {
-  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(244, 63, 94, 0.6);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 35px rgba(244, 63, 94, 0.7);
+  color: #ffffff;
 }
 
 .btn-qixi-wish {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px !important;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
   background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-  color: #fff;
-  border: 1px solid rgba(192, 132, 252, 0.4);
-  box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+  color: #ffffff;
+  border: 1px solid rgba(192, 132, 252, 0.5);
+  box-shadow: 0 6px 25px rgba(124, 58, 237, 0.45);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-qixi-wish:hover {
   background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(168, 85, 247, 0.6);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 35px rgba(168, 85, 247, 0.7);
+  color: #ffffff;
 }
 
 .wish-counter {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 0.2rem 0.55rem;
-  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.22);
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
   font-size: 0.85rem;
   margin-left: 0.4rem;
+  color: #ffffff;
 }
 
 .wish-source-badge {
@@ -1220,14 +1275,25 @@ body.qixi-body .site-header {
 
 .btn-back-home {
   margin-top: 1rem;
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  padding: 0.6rem 1.4rem;
-  border-radius: var(--radius-md);
+  padding: 0.7rem 1.8rem;
+  border-radius: 50px !important;
   text-decoration: none;
   font-weight: 600;
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-back-home:hover {
+  background: linear-gradient(135deg, #f43f5e, #a855f7);
+  border-color: rgba(244, 63, 94, 0.6);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(244, 63, 94, 0.4);
 }
 
 .btn-back-home:hover {
