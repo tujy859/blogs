@@ -1,9 +1,12 @@
-/* Romantic Qixi Interactive Scripts */
+/* Interactive Scripts */
 document.addEventListener('DOMContentLoaded', function() {
-  initStarryCanvas();
-  initHeartClicks();
+  const isQixi = document.body.classList.contains('qixi-body') || document.getElementById('starry-canvas');
+  if (isQixi) {
+    initStarryCanvas();
+    initHeartClicks();
+    initWishCount();
+  }
   initReadCount();
-  initWishCount();
 });
 
 /* Canvas Starry Sky & Meteors */

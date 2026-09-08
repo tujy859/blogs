@@ -1,30 +1,31 @@
-/* Romantic Qixi Festival & Starry Theme */
+/* Modern Tech Theme & Scoped Qixi Archive for Jinying's Blog */
+
+/* 1. Global Variables (Default: Modern Dark Tech) */
 :root {
-  --bg-dark: #080b16;
-  --bg-cosmic: #110d24;
-  --bg-card: rgba(26, 20, 51, 0.7);
-  --bg-card-hover: rgba(43, 30, 82, 0.85);
-  --border-qixi: rgba(244, 63, 94, 0.25);
-  --border-glow: rgba(251, 113, 133, 0.5);
-  --border-subtle: rgba(255, 255, 255, 0.08);
+  --bg: #0b0f19;
+  --bg-secondary: #111827;
+  --card-bg: rgba(30, 41, 59, 0.65);
+  --card-hover: rgba(51, 65, 85, 0.85);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(14, 165, 233, 0.4);
   
-  --primary-pink: #f43f5e;
-  --primary-rose: #fb7185;
-  --primary-purple: #a855f7;
-  --starlight-gold: #fbbf24;
-  --moon-glow: #e0e7ff;
+  --primary: #0ea5e9;
+  --primary-hover: #38bdf8;
+  --primary-glow: rgba(14, 165, 233, 0.18);
+  --accent: #10b981;
   
-  --text-primary: #fdf2f8;
+  --text-main: #f8fafc;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
-  --text-rose: #fda4af;
-  
-  --radius-lg: 20px;
-  --radius-md: 14px;
+  --text-dim: #64748b;
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
   --radius-sm: 8px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 2. Global Reset & Base */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -34,33 +35,18 @@ html, body {
   padding: 0;
   min-height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-dark);
-  background-image: 
-    radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.18) 0%, transparent 50%),
-    radial-gradient(circle at 20% 40%, rgba(244, 63, 94, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.12) 0%, transparent 45%),
-    linear-gradient(180deg, #090b17 0%, #120e28 50%, #070913 100%);
-  background-attachment: fixed;
-  color: var(--text-primary);
+  background-color: var(--bg);
+  color: var(--text-main);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Background Canvas */
-#starry-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 0;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 45%),
+    linear-gradient(180deg, #0b0f19 0%, #0d121f 50%, #080b12 100%);
+  background-attachment: fixed;
 }
 
 .container {
-  max-width: 960px;
+  max-width: 920px;
   margin: 0 auto;
   padding: 0 1.5rem;
   position: relative;
@@ -68,22 +54,21 @@ html, body {
 }
 
 .main-content {
-  padding-top: 2.5rem;
-  padding-bottom: 5rem;
-  min-height: calc(100vh - 180px);
+  padding-top: 2rem;
+  padding-bottom: 4.5rem;
+  min-height: calc(100vh - 160px);
 }
 
-/* Header */
+/* 3. Site Header */
 .site-header {
-  background: rgba(9, 11, 23, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-qixi);
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 1rem 0;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  padding: 0.9rem 0;
 }
 
 .header-inner {
@@ -97,224 +82,143 @@ html, body {
   align-items: center;
   gap: 0.6rem;
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--text-main);
   font-weight: 700;
   font-size: 1.25rem;
   letter-spacing: -0.02em;
-  transition: var(--transition);
 }
 
 .brand-icon {
-  font-size: 1.35rem;
-  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
-  animation: floatMoon 4s ease-in-out infinite alternate;
-}
-
-.brand-text {
-  background: linear-gradient(135deg, #ffffff 0%, #fda4af 60%, #f43f5e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.qixi-nav-badge {
-  background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(168, 85, 247, 0.25));
-  border: 1px solid rgba(244, 63, 94, 0.4);
-  color: #fda4af;
-  font-size: 0.75rem;
-  padding: 0.15rem 0.55rem;
-  border-radius: 20px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  animation: pulseBadge 2.5s infinite;
-}
-
-@keyframes pulseBadge {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4); }
-  50% { box-shadow: 0 0 10px 2px rgba(244, 63, 94, 0.3); }
+  color: var(--primary);
+  font-size: 1.25rem;
 }
 
 .main-nav {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.2rem;
 }
 
 .nav-item {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-sm);
   transition: var(--transition);
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
 }
 
 .nav-item:hover {
-  color: var(--text-rose);
-  background: rgba(244, 63, 94, 0.1);
+  color: var(--primary-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-qixi-archive {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(244, 63, 94, 0.15));
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: #f472b6 !important;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.88rem;
+}
+
+.nav-qixi-archive:hover {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(244, 63, 94, 0.3));
+  border-color: rgba(244, 63, 94, 0.6);
+  color: #fff !important;
 }
 
 .nav-external {
-  color: #fda4af;
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: var(--text-dim);
 }
 
-/* Qixi Romantic Hero */
-.qixi-hero {
-  position: relative;
-  background: linear-gradient(145deg, rgba(30, 20, 56, 0.8) 0%, rgba(17, 12, 38, 0.9) 100%);
-  border: 1px solid var(--border-qixi);
+/* 4. Hero Card (Tech Homepage) */
+.hero-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 3.5rem 2.5rem 3rem 2.5rem;
-  margin-bottom: 3.5rem;
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(244, 63, 94, 0.12),
-    inset 0 0 60px rgba(168, 85, 247, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  text-align: center;
+  padding: 2.8rem 2.2rem;
+  margin-bottom: 2.8rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
   overflow: hidden;
 }
 
-/* Glowing Moon & Celestial Visual */
-.celestial-wrapper {
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge-wrap {
   display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.glowing-moon {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fffdfa 0%, #fef3c7 40%, #fde68a 70%, #d97706 100%);
-  position: relative;
-  box-shadow: 
-    0 0 25px 5px rgba(253, 230, 138, 0.6),
-    0 0 60px 15px rgba(244, 63, 94, 0.3);
-  animation: moonFloat 5s ease-in-out infinite alternate;
-}
-
-.moon-crater {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(180, 83, 9, 0.15);
-  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-.moon-crater.c1 { width: 18px; height: 18px; top: 22px; left: 24px; }
-.moon-crater.c2 { width: 12px; height: 12px; top: 52px; left: 45px; }
-.moon-crater.c3 { width: 14px; height: 14px; top: 30px; left: 55px; }
-
-.moon-glow-ring {
-  position: absolute;
-  top: -12px;
-  left: -12px;
-  right: -12px;
-  bottom: -12px;
-  border-radius: 50%;
-  border: 1px dashed rgba(253, 230, 138, 0.4);
-  animation: spinSlow 30s linear infinite;
-}
-
-.orbiting-item {
-  position: absolute;
-  font-size: 1rem;
-}
-.orbiting-item.o1 { top: -20px; right: -15px; animation: starTwinkle 2s infinite ease-in-out; }
-.orbiting-item.o2 { bottom: -10px; left: -20px; font-size: 1.2rem; animation: starTwinkle 2.5s infinite 1s ease-in-out; }
-.orbiting-item.o3 { top: 40px; right: -30px; animation: starTwinkle 1.8s infinite 0.5s ease-in-out; }
-
-@keyframes moonFloat {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-8px) rotate(3deg); }
-}
-
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes starTwinkle {
-  0%, 100% { opacity: 0.4; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.15); }
-}
-
-/* Date Badge */
-.qixi-date-badge {
-  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  background: rgba(244, 63, 94, 0.12);
-  border: 1px solid rgba(244, 63, 94, 0.35);
-  padding: 0.45rem 1.2rem;
-  border-radius: 30px;
-  font-size: 0.92rem;
-  color: var(--text-rose);
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(244, 63, 94, 0.15);
-}
-
-.badge-tag {
-  background: linear-gradient(135deg, #f43f5e, #a855f7);
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.15rem 0.6rem;
-  border-radius: 12px;
-}
-
-/* Core Romantic Typography */
-.romantic-heading-wrap {
+  gap: 0.8rem;
   margin-bottom: 1.2rem;
+  flex-wrap: wrap;
 }
 
-.romantic-core-heading {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
+.hero-badge {
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--primary-hover);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
 }
 
-.romantic-quote-en {
-  font-family: 'Dancing Script', 'Playfair Display', cursive, serif;
-  font-size: 3.1rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  background: linear-gradient(135deg, #fff 0%, #ffe4e6 30%, #fb7185 70%, #f43f5e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.5));
+.hero-archive-tag {
+  background: rgba(168, 85, 247, 0.12);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  font-size: 0.82rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: var(--transition);
 }
 
-.romantic-quote-cn {
-  font-family: 'Ma Shan Zheng', 'Inter', cursive, sans-serif;
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: #fed7aa;
-  letter-spacing: 0.15em;
-  margin-top: 0.2rem;
-  text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+.hero-archive-tag:hover {
+  background: rgba(168, 85, 247, 0.25);
+  color: #fff;
+  border-color: rgba(168, 85, 247, 0.5);
 }
 
-.romantic-subtitle {
-  font-size: 1.05rem;
+.hero-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.8rem 0;
+  color: var(--text-main);
+}
+
+.hero-lead {
+  font-size: 1.15rem;
   color: var(--text-secondary);
-  max-width: 680px;
-  margin: 0 auto 2rem auto;
-  line-height: 1.8;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
 }
 
-/* Action Buttons */
-.romantic-actions {
+.hero-intro {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0 0 1.8rem 0;
+  max-width: 680px;
+}
+
+.hero-actions {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 2.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
@@ -322,122 +226,43 @@ html, body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.8rem 1.6rem;
+  padding: 0.65rem 1.3rem;
   border-radius: var(--radius-md);
+  font-size: 0.95rem;
   font-weight: 600;
-  font-size: 1rem;
   text-decoration: none;
+  transition: var(--transition);
   cursor: pointer;
   border: none;
-  transition: var(--transition);
 }
 
-.btn-qixi-letter {
-  background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #a855f7 100%);
-  color: #ffffff;
-  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px var(--primary-glow);
 }
 
-.btn-qixi-letter:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 30px rgba(244, 63, 94, 0.6);
-}
-
-.btn-qixi-wish {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(251, 191, 36, 0.4);
-  color: #fef08a;
-  backdrop-filter: blur(8px);
-}
-
-.btn-qixi-wish:hover {
-  background: rgba(251, 191, 36, 0.15);
-  border-color: #fde047;
+.btn-primary:hover {
+  background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.35);
 }
 
-.wish-counter {
-  background: rgba(244, 63, 94, 0.3);
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  margin-left: 0.2rem;
-  display: inline-flex;
-  align-items: center;
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
 }
 
-/* Wish Source Badge (Cloud vs Local) */
-.wish-source-badge {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: #fef08a;
-  background: rgba(251, 191, 36, 0.2);
-  border: 1px solid rgba(251, 191, 36, 0.35);
-  padding: 0.05rem 0.4rem;
-  border-radius: 8px;
-  margin-left: 0.35rem;
-  letter-spacing: 0.02em;
-  vertical-align: middle;
-  transition: var(--transition);
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.wish-source-badge.local {
-  color: #fda4af;
-  background: rgba(244, 63, 94, 0.2);
-  border-color: rgba(244, 63, 94, 0.35);
-}
-
-.wish-source-badge.cloud {
-  color: #fef08a;
-  background: rgba(251, 191, 36, 0.2);
-  border-color: rgba(251, 191, 36, 0.35);
-}
-
-/* Quote Card inside Hero */
-.romantic-quote-card {
-  background: rgba(14, 10, 29, 0.6);
-  border: 1px solid rgba(244, 63, 94, 0.2);
-  border-radius: var(--radius-md);
-  padding: 1.5rem 2rem;
-  max-width: 580px;
-  margin: 0 auto;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
-}
-
-.quote-stars {
-  color: var(--starlight-gold);
-  font-size: 0.9rem;
-  letter-spacing: 0.3em;
-  margin-bottom: 0.5rem;
-}
-
-.quote-text {
-  font-size: 1rem;
-  font-style: italic;
-  color: #fed7e2;
-  line-height: 1.8;
-  margin: 0 0 0.8rem 0;
-}
-
-.quote-footer {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  border-top: 1px dashed rgba(255, 255, 255, 0.1);
-  padding-top: 0.6rem;
-}
-
-.quote-author {
-  color: var(--primary-rose);
-  font-weight: 600;
-}
-
-/* Keepsake Cards Section */
+/* 5. Sections & Post Cards */
 .section-block {
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 
 .section-header {
@@ -445,86 +270,116 @@ html, body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--border-qixi);
 }
 
 .section-title {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  margin: 0;
-  color: var(--text-primary);
   letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text-main);
 }
 
 .section-more {
-  color: var(--primary-rose);
+  color: var(--primary);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 500;
   transition: var(--transition);
 }
 
 .section-more:hover {
-  color: #fff;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
-.romantic-grid {
+/* Featured Posts Grid */
+.post-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.4rem;
 }
 
-.romantic-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-qixi);
+.post-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.post-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 1.8rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: var(--transition);
+  padding: 1.5rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.romantic-card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-glow);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(244, 63, 94, 0.2);
+.post-card:hover {
+  background: var(--card-hover);
+  border-color: var(--border-focus);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
-.card-symbol {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
+.post-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
 }
 
-.card-title {
+.post-date {
+  color: var(--text-dim);
+}
+
+.featured-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.post-card-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--text-primary);
   margin: 0 0 0.6rem 0;
+  line-height: 1.4;
+  color: var(--text-main);
 }
 
-.card-desc {
+.post-card-excerpt {
   font-size: 0.92rem;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.65;
   margin: 0 0 1.2rem 0;
   flex-grow: 1;
 }
 
-.card-tag {
-  font-size: 0.78rem;
-  color: var(--primary-rose);
-  background: rgba(244, 63, 94, 0.12);
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  align-self: flex-start;
+.post-card-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
 }
 
-/* Post List */
+.tag-pill {
+  font-size: 0.78rem;
+  color: var(--primary-hover);
+  background: rgba(14, 165, 233, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+/* Post List Vertical */
 .post-list-vertical {
   display: flex;
   flex-direction: column;
@@ -538,8 +393,8 @@ html, body {
 }
 
 .post-item {
-  background: rgba(18, 14, 36, 0.65);
-  border: 1px solid var(--border-subtle);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1.25rem 1.5rem;
   display: flex;
@@ -552,10 +407,10 @@ html, body {
 }
 
 .post-item:hover {
-  background: rgba(36, 24, 66, 0.85);
-  border-color: var(--border-qixi);
+  background: var(--card-hover);
+  border-color: var(--border-focus);
   transform: translateX(4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .post-item-main {
@@ -566,7 +421,7 @@ html, body {
   margin: 0 0 0.35rem 0;
   font-size: 1.08rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text-main);
 }
 
 .post-item-excerpt {
@@ -576,38 +431,22 @@ html, body {
   line-height: 1.6;
 }
 
-.post-item-tags {
-  margin-top: 0.5rem;
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.tag-badge {
-  background: rgba(244, 63, 94, 0.1);
-  color: var(--text-rose);
-  font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  border: 1px solid rgba(244, 63, 94, 0.2);
-}
-
 .post-item-meta {
   flex-shrink: 0;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-dim);
   text-align: right;
 }
 
-/* Single Post Page */
+/* 6. Single Post Page */
 .post-single {
-  background: rgba(22, 16, 46, 0.75);
-  border: 1px solid var(--border-qixi);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 3rem 2.5rem;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  padding: 2.8rem 2.2rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .post-header {
@@ -615,30 +454,39 @@ html, body {
 }
 
 .post-header .post-title {
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2.1rem;
+  font-weight: 800;
   margin: 0.8rem 0 0 0;
-  line-height: 1.3;
-  color: var(--text-primary);
+  line-height: 1.35;
+  color: var(--text-main);
 }
 
 .post-header .post-meta {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  color: var(--text-muted);
+  gap: 0.8rem;
+  color: var(--text-dim);
   font-size: 0.9rem;
   flex-wrap: wrap;
 }
 
 .post-reads {
-  color: var(--primary-rose);
+  color: var(--primary);
+}
+
+.tag-badge {
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--primary-hover);
+  font-size: 0.78rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(14, 165, 233, 0.2);
 }
 
 .post-divider {
   border: 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(244, 63, 94, 0.4), rgba(168, 85, 247, 0.4), transparent);
+  background: linear-gradient(90deg, var(--primary), transparent);
   margin: 1.5rem 0 2rem 0;
 }
 
@@ -649,62 +497,495 @@ html, body {
 }
 
 .post-body a {
-  color: var(--primary-rose);
-  text-decoration: underline;
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--primary);
 }
 
-.post-body h2, .post-body h3 {
-  color: var(--text-primary);
-  margin-top: 2.2rem;
+.post-body a:hover {
+  color: var(--primary-hover);
+  border-bottom-style: solid;
+}
+
+.post-body h2 {
+  color: var(--text-main);
+  font-size: 1.6rem;
+  margin-top: 2.5rem;
   margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-body h3 {
+  color: var(--text-main);
+  font-size: 1.3rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.8rem;
 }
 
 .post-body code {
-  background: rgba(244, 63, 94, 0.12);
-  color: #fbcfe8;
+  background: rgba(255, 255, 255, 0.08);
+  color: #38bdf8;
   padding: 0.2rem 0.45rem;
   border-radius: 4px;
-  font-family: 'Fira Code', monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
   font-size: 0.9em;
-  border: 1px solid rgba(244, 63, 94, 0.2);
 }
 
-.post-footer {
-  margin-top: 3.5rem;
+.post-body pre {
+  background: #080c14;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  overflow-x: auto;
+}
+
+.post-body pre code {
+  background: none;
+  padding: 0;
+  color: #e2e8f0;
+}
+
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  margin: 1.5rem auto;
+  display: block;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.post-body blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  background: rgba(14, 165, 233, 0.08);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--text-secondary);
+}
+
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--border-qixi);
+  border-top: 1px solid var(--border);
 }
 
-.back-link {
-  color: var(--primary-rose);
+.post-nav .nav-link {
+  color: var(--primary);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 500;
   transition: var(--transition);
 }
 
-.back-link:hover {
+.post-nav .nav-link:hover {
+  color: var(--primary-hover);
+}
+
+/* 7. Footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  background: rgba(11, 15, 25, 0.6);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.footer-copyright {
+  margin: 0;
+}
+
+.footer-sep {
+  margin: 0 0.5rem;
+  color: var(--border);
+}
+
+.footer-archive-link {
+  color: #c084fc;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-archive-link:hover {
+  color: #f472b6;
+  text-decoration: underline;
+}
+
+.footer-site-pv {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+/* 8. Scoped Qixi Archive Theme (Only active inside body.qixi-body) */
+#starry-canvas {
+  display: none;
+}
+
+body.qixi-body {
+  background-color: #080b16;
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 20% 40%, rgba(244, 63, 94, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.12) 0%, transparent 45%),
+    linear-gradient(180deg, #090b17 0%, #120e28 50%, #070913 100%);
+  background-attachment: fixed;
+  color: #fdf2f8;
+}
+
+body.qixi-body #starry-canvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.qixi-body .site-header {
+  background: rgba(9, 11, 23, 0.75);
+  border-bottom: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+/* Archive Nav Bar on Qixi Page */
+.archive-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0.8rem 1.4rem;
+  background: rgba(26, 20, 51, 0.6);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+}
+
+.archive-back-link {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: var(--transition);
+}
+
+.archive-back-link:hover {
   color: #fff;
 }
 
-/* Page Header (All Posts) */
-.page-header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid var(--border-qixi);
+.archive-badge {
+  font-size: 0.85rem;
+  color: #fb7185;
+  font-weight: 500;
 }
 
-.page-title {
-  margin: 0 0 0.4rem 0;
-  font-size: 2rem;
+/* Qixi Celestial & Hero Visuals */
+.qixi-hero {
+  position: relative;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.celestial-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.glowing-moon {
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at 35% 35%, #fffdf0 0%, #fef08a 40%, #f59e0b 90%, #d97706 100%);
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  box-shadow: 
+    0 0 35px rgba(254, 240, 138, 0.8),
+    0 0 70px rgba(251, 146, 60, 0.5),
+    0 0 120px rgba(244, 63, 94, 0.3);
+  animation: moonPulse 6s ease-in-out infinite alternate;
+}
+
+.moon-glow-ring {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 1px solid rgba(254, 240, 138, 0.35);
+  animation: ringRotate 20s linear infinite;
+}
+
+.orbiting-item {
+  position: absolute;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 8px #f43f5e);
+}
+
+.orbiting-item.o1 {
+  top: -10px;
+  left: 50%;
+  animation: orbit1 8s linear infinite;
+}
+
+.orbiting-item.o2 {
+  bottom: 0;
+  right: 10px;
+  animation: orbit2 10s linear infinite;
+}
+
+.orbiting-item.o3 {
+  top: 50%;
+  left: -15px;
+  animation: orbit3 12s linear infinite;
+}
+
+@keyframes moonPulse {
+  0% { transform: scale(0.98); filter: brightness(1); }
+  100% { transform: scale(1.02); filter: brightness(1.1); }
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(85px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(85px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+  from { transform: rotate(120deg) translateX(90px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(90px) rotate(-480deg); }
+}
+
+@keyframes orbit3 {
+  from { transform: rotate(240deg) translateX(80px) rotate(-240deg); }
+  to { transform: rotate(600deg) translateX(80px) rotate(-600deg); }
+}
+
+/* Qixi Date Badge & Headings */
+.qixi-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(251, 113, 133, 0.35);
+  border-radius: 50px;
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
+}
+
+.badge-icon { font-size: 1.1rem; }
+.badge-date { font-size: 0.9rem; color: #cbd5e1; }
+.badge-tag { font-size: 0.85rem; color: #fb7185; font-weight: 600; }
+
+.romantic-core-heading {
+  margin: 0 0 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.romantic-quote-en {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: var(--text-primary);
+  font-style: italic;
+  background: linear-gradient(135deg, #fff 20%, #fbcfe8 50%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
 }
 
-.page-subtitle {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.95rem;
+.romantic-quote-cn {
+  font-family: 'Ma Shan Zheng', cursive, sans-serif;
+  font-size: 2rem;
+  color: #fbbf24;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+}
+
+.romantic-subtitle {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  max-width: 650px;
+  margin: 0 auto 2.2rem auto;
+  line-height: 1.8;
+}
+
+/* Qixi Action Buttons */
+.romantic-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-qixi-letter {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  color: #fff;
+  border: 1px solid rgba(251, 113, 133, 0.5);
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.4);
+}
+
+.btn-qixi-letter:hover {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(244, 63, 94, 0.6);
+}
+
+.btn-qixi-wish {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+}
+
+.btn-qixi-wish:hover {
+  background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(168, 85, 247, 0.6);
+}
+
+.wish-counter {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.55rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-left: 0.4rem;
+}
+
+.wish-source-badge {
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+
+/* Romantic Quote Card */
+.romantic-quote-card {
+  max-width: 580px;
+  margin: 0 auto;
+  background: rgba(26, 20, 51, 0.65);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.quote-stars {
+  color: #fbbf24;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.3em;
+}
+
+.quote-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #fdf2f8;
+  margin: 0 0 1.2rem 0;
+}
+
+.quote-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #fda4af;
+}
+
+/* Three Romantic Keepsake Cards */
+.romantic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.romantic-card {
+  background: rgba(26, 20, 51, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.romantic-card:hover {
+  background: rgba(43, 30, 82, 0.8);
+  border-color: rgba(244, 63, 94, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-symbol {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fdf2f8;
+  margin: 0 0 0.6rem 0;
+}
+
+.card-desc {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0 0 1.2rem 0;
+  flex-grow: 1;
+}
+
+.card-tag {
+  font-size: 0.78rem;
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+.archive-bottom-cta {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+.btn-back-home {
+  margin-top: 1rem;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-back-home:hover {
+  background: var(--primary);
+  color: #fff;
 }
 
 /* Romantic Love Letter Modal */
@@ -730,7 +1011,6 @@ html, body {
   background: rgba(7, 9, 20, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  animation: fadeIn 0.3s ease;
 }
 
 .love-modal-content {
@@ -746,220 +1026,97 @@ html, body {
   overflow-y: auto;
   box-shadow: 
     0 25px 60px rgba(0, 0, 0, 0.7),
-    0 0 50px rgba(244, 63, 94, 0.25),
-    inset 0 0 30px rgba(168, 85, 247, 0.1);
-  animation: scaleUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    0 0 50px rgba(244, 63, 94, 0.25);
+  color: #fdf2f8;
 }
 
 .love-modal-close {
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--text-muted);
-  width: 34px;
-  height: 34px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fda4af;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: var(--transition);
 }
 
 .love-modal-close:hover {
-  background: rgba(244, 63, 94, 0.3);
+  background: #f43f5e;
   color: #fff;
-  transform: rotate(90deg);
 }
 
 .love-letter-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
 }
 
-.heart-stamp {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  animation: pulseBadge 2s infinite;
-}
-
-.love-letter-badge {
-  display: inline-block;
-  font-size: 0.8rem;
-  color: var(--primary-rose);
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.3);
-  padding: 0.2rem 0.7rem;
-  border-radius: 20px;
-  margin-bottom: 0.8rem;
-}
-
+.heart-stamp { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.love-letter-badge { font-size: 0.85rem; color: #fb7185; }
 .love-letter-title {
-  font-family: 'Ma Shan Zheng', 'Inter', cursive, sans-serif;
-  font-size: 2rem;
-  color: #ffe4e6;
-  margin: 0;
-  letter-spacing: 0.1em;
-  text-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+  font-family: 'Ma Shan Zheng', cursive, sans-serif;
+  font-size: 2.2rem;
+  color: #fff;
+  margin: 0.5rem 0 0 0;
 }
 
 .love-letter-body {
-  color: #f1f5f9;
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.9;
+  color: #fce7f3;
 }
 
 .letter-verse {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.25rem;
-  color: #fed7aa;
   text-align: center;
+  font-style: italic;
+  color: #fbbf24;
   margin-bottom: 1.5rem;
+  font-size: 1.15rem;
 }
 
 .letter-quote-box {
-  background: rgba(14, 10, 29, 0.5);
-  border-left: 3px solid var(--primary-pink);
+  background: rgba(244, 63, 94, 0.12);
+  border-left: 3px solid #f43f5e;
   padding: 1rem 1.2rem;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: 0 10px 10px 0;
   margin: 1.5rem 0;
 }
 
-.letter-quote-box .en-quote {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.4rem;
-  color: var(--primary-rose);
-  margin: 0 0 0.3rem 0;
+.en-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #fff;
+  margin: 0 0 0.4rem 0;
 }
 
-.letter-quote-box .cn-quote {
+.cn-quote {
   font-size: 0.95rem;
-  color: #fed7aa;
+  color: #fbcfe8;
   margin: 0;
 }
 
 .letter-signature {
-  margin-top: 2rem;
   text-align: right;
-  border-top: 1px dashed rgba(244, 63, 94, 0.2);
-  padding-top: 1rem;
-}
-
-.sign-text {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.2rem;
-  color: var(--text-rose);
-  margin: 0 0 0.3rem 0;
-}
-
-.sign-date {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-/* Floating Particles */
-.floating-heart-particle {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  font-size: 1.5rem;
-  animation: floatUpParticle 1.6s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
-}
-
-@keyframes floatUpParticle {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0deg) scale(0.6);
-  }
-  50% {
-    opacity: 0.9;
-    transform: translate(var(--dx), -70px) rotate(var(--rot)) scale(1.2);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--dx), -140px) rotate(var(--rot)) scale(0.8);
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleUp {
-  from { opacity: 0; transform: scale(0.9) translateY(20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-/* Footer */
-.site-footer {
-  border-top: 1px solid var(--border-qixi);
-  padding: 2.5rem 0;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  background: rgba(9, 11, 23, 0.85);
-  backdrop-filter: blur(12px);
-}
-
-.footer-romantic-note {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;
+  margin-top: 2rem;
   color: #fda4af;
-  margin-bottom: 0.6rem;
 }
 
-.footer-copyright strong {
-  color: #fdf2f8;
-}
+.sign-text { font-weight: 600; margin: 0; }
+.sign-date { font-size: 0.85rem; opacity: 0.8; margin: 0.2rem 0 0 0; }
 
-/* Footer Total Site Visits Display */
-.footer-site-pv {
-  margin-top: 0.6rem;
-  font-size: 0.86rem;
-  color: var(--text-secondary);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(244, 63, 94, 0.08);
-  border: 1px solid rgba(244, 63, 94, 0.2);
-  padding: 0.25rem 0.85rem;
-  border-radius: 20px;
-}
-
-.footer-pv-icon {
-  font-size: 0.95rem;
-}
-
-.footer-site-pv #site-visit-count {
-  color: #fef08a;
-  font-weight: 600;
-}
-
-@media (max-width: 680px) {
-  .qixi-hero {
-    padding: 2.5rem 1.25rem 2rem 1.25rem;
-  }
-  .romantic-quote-en {
-    font-size: 2.2rem;
-  }
-  .romantic-quote-cn {
-    font-size: 1.25rem;
-  }
-  .header-inner {
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  .post-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  .post-single {
-    padding: 1.5rem;
-  }
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .hero-title { font-size: 1.8rem; }
+  .romantic-quote-en { font-size: 2rem; }
+  .romantic-quote-cn { font-size: 1.5rem; }
+  .post-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .post-item-meta { text-align: left; }
+  .post-single { padding: 1.8rem 1.2rem; }
 }
