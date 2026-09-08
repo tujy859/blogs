@@ -873,3 +873,497 @@ img {
     font-size: 1.45rem;
   }
 }
+
+me (Only active inside body.qixi-body) */
+#starry-canvas {
+  display: none;
+}
+
+body.qixi-body {
+  background-color: #080b16;
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 20% 40%, rgba(244, 63, 94, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.12) 0%, transparent 45%),
+    linear-gradient(180deg, #090b17 0%, #120e28 50%, #070913 100%);
+  background-attachment: fixed;
+  color: #fdf2f8;
+}
+
+body.qixi-body #starry-canvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.qixi-body .site-header {
+  background: rgba(9, 11, 23, 0.75);
+  border-bottom: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+/* Archive Nav Bar on Qixi Page */
+.archive-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0.8rem 1.4rem;
+  background: rgba(26, 20, 51, 0.6);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+}
+
+.archive-back-link {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: var(--transition);
+}
+
+.archive-back-link:hover {
+  color: #fff;
+}
+
+.archive-badge {
+  font-size: 0.85rem;
+  color: #fb7185;
+  font-weight: 500;
+}
+
+/* Qixi Celestial & Hero Visuals */
+.qixi-hero {
+  position: relative;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.celestial-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.glowing-moon {
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at 35% 35%, #fffdf0 0%, #fef08a 40%, #f59e0b 90%, #d97706 100%);
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  box-shadow: 
+    0 0 35px rgba(254, 240, 138, 0.8),
+    0 0 70px rgba(251, 146, 60, 0.5),
+    0 0 120px rgba(244, 63, 94, 0.3);
+  animation: moonPulse 6s ease-in-out infinite alternate;
+}
+
+.moon-glow-ring {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 1px solid rgba(254, 240, 138, 0.35);
+  animation: ringRotate 20s linear infinite;
+}
+
+.orbiting-item {
+  position: absolute;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 8px #f43f5e);
+}
+
+.orbiting-item.o1 {
+  top: -10px;
+  left: 50%;
+  animation: orbit1 8s linear infinite;
+}
+
+.orbiting-item.o2 {
+  bottom: 0;
+  right: 10px;
+  animation: orbit2 10s linear infinite;
+}
+
+.orbiting-item.o3 {
+  top: 50%;
+  left: -15px;
+  animation: orbit3 12s linear infinite;
+}
+
+@keyframes moonPulse {
+  0% { transform: scale(0.98); filter: brightness(1); }
+  100% { transform: scale(1.02); filter: brightness(1.1); }
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit1 {
+  from { transform: rotate(0deg) translateX(85px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(85px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+  from { transform: rotate(120deg) translateX(90px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(90px) rotate(-480deg); }
+}
+
+@keyframes orbit3 {
+  from { transform: rotate(240deg) translateX(80px) rotate(-240deg); }
+  to { transform: rotate(600deg) translateX(80px) rotate(-600deg); }
+}
+
+/* Qixi Date Badge & Headings */
+.qixi-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(244, 63, 94, 0.15);
+  border: 1px solid rgba(251, 113, 133, 0.35);
+  border-radius: 50px;
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
+}
+
+.badge-icon { font-size: 1.1rem; }
+.badge-date { font-size: 0.9rem; color: #cbd5e1; }
+.badge-tag { font-size: 0.85rem; color: #fb7185; font-weight: 600; }
+
+.romantic-core-heading {
+  margin: 0 0 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.romantic-quote-en {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(135deg, #fff 20%, #fbcfe8 50%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.romantic-quote-cn {
+  font-family: 'Ma Shan Zheng', cursive, sans-serif;
+  font-size: 2rem;
+  color: #fbbf24;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+}
+
+.romantic-subtitle {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  max-width: 650px;
+  margin: 0 auto 2.2rem auto;
+  line-height: 1.8;
+}
+
+/* Qixi Action Buttons */
+.romantic-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-qixi-letter {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  color: #fff;
+  border: 1px solid rgba(251, 113, 133, 0.5);
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.4);
+}
+
+.btn-qixi-letter:hover {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(244, 63, 94, 0.6);
+}
+
+.btn-qixi-wish {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: #fff;
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+}
+
+.btn-qixi-wish:hover {
+  background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(168, 85, 247, 0.6);
+}
+
+.wish-counter {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.55rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-left: 0.4rem;
+}
+
+.wish-source-badge {
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+
+/* Romantic Quote Card */
+.romantic-quote-card {
+  max-width: 580px;
+  margin: 0 auto;
+  background: rgba(26, 20, 51, 0.65);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.quote-stars {
+  color: #fbbf24;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.3em;
+}
+
+.quote-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #fdf2f8;
+  margin: 0 0 1.2rem 0;
+}
+
+.quote-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #fda4af;
+}
+
+/* Three Romantic Keepsake Cards */
+.romantic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.romantic-card {
+  background: rgba(26, 20, 51, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.romantic-card:hover {
+  background: rgba(43, 30, 82, 0.8);
+  border-color: rgba(244, 63, 94, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-symbol {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fdf2f8;
+  margin: 0 0 0.6rem 0;
+}
+
+.card-desc {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0 0 1.2rem 0;
+  flex-grow: 1;
+}
+
+.card-tag {
+  font-size: 0.78rem;
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+.archive-bottom-cta {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+.btn-back-home {
+  margin-top: 1rem;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-back-home:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Romantic Love Letter Modal */
+.love-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.love-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(7, 9, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.love-modal-content {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(160deg, #23173d 0%, #150f29 50%, #1e1236 100%);
+  border: 1px solid rgba(251, 113, 133, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  max-width: 620px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.7),
+    0 0 50px rgba(244, 63, 94, 0.25);
+  color: #fdf2f8;
+}
+
+.love-modal-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fda4af;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.love-modal-close:hover {
+  background: #f43f5e;
+  color: #fff;
+}
+
+.love-letter-header {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.heart-stamp { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.love-letter-badge { font-size: 0.85rem; color: #fb7185; }
+.love-letter-title {
+  font-family: 'Ma Shan Zheng', cursive, sans-serif;
+  font-size: 2.2rem;
+  color: #fff;
+  margin: 0.5rem 0 0 0;
+}
+
+.love-letter-body {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #fce7f3;
+}
+
+.letter-verse {
+  text-align: center;
+  font-style: italic;
+  color: #fbbf24;
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+}
+
+.letter-quote-box {
+  background: rgba(244, 63, 94, 0.12);
+  border-left: 3px solid #f43f5e;
+  padding: 1rem 1.2rem;
+  border-radius: 0 10px 10px 0;
+  margin: 1.5rem 0;
+}
+
+.en-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #fff;
+  margin: 0 0 0.4rem 0;
+}
+
+.cn-quote {
+  font-size: 0.95rem;
+  color: #fbcfe8;
+  margin: 0;
+}
+
+.letter-signature {
+  text-align: right;
+  margin-top: 2rem;
+  color: #fda4af;
+}
+
+.sign-text { font-weight: 600; margin: 0; }
+.sign-date { font-size: 0.85rem; opacity: 0.8; margin: 0.2rem 0 0 0; }
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .hero-title { font-size: 1.8rem; }
+  .romantic-quote-en { font-size: 2rem; }
+  .romantic-quote-cn { font-size: 1.5rem; }
+  .post-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .post-item-meta { text-align: left; }
+  .post-single { padding: 1.8rem 1.2rem; }
+}

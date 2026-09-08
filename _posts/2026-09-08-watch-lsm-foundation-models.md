@@ -1,5 +1,6 @@
 ---
 layout: post
+pinned: true
 title: 智能手表生理信号基础模型（Watch-LSM）：从“频域碰撞”痛点到端侧基础模型实战全景
 date: 2026-09-08 12:20:00 +0800
 tags:
