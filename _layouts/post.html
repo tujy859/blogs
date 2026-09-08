@@ -2,37 +2,38 @@
 layout: default
 ---
 
-<article class="post-single">
-  <header class="post-header">
-    <div class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">📅 {{ page.date | date: "%b %-d, %Y" }}</time>
-      <span class="post-reads" title="全站累计访问量"> • 👁️ 全站总访问: <span id="read-count">0</span></span>
+<article class="post-detail-card">
+  <header class="post-detail-header">
+    <h1 class="post-detail-title">{{ page.title }}</h1>
+    <div class="post-detail-meta">
+      <span class="meta-item"><span class="meta-icon">📅</span> {{ page.date | date: "%Y-%m-%d" }}</span>
+      <span class="meta-item"><span class="meta-icon">👤</span> {{ page.author | default: site.author.name }}</span>
       {% if page.tags %}
-        <div class="post-tags">
+        <span class="meta-item meta-tags">
+          <span class="meta-icon">🏷️</span>
           {% for tag in page.tags %}
-            <span class="tag-badge">#{{ tag }}</span>
+            <span class="post-tag-item">#{{ tag }}</span>
           {% endfor %}
-        </div>
+        </span>
       {% endif %}
     </div>
-    <h1 class="post-title">{{ page.title }}</h1>
   </header>
 
-  <hr class="post-divider">
+  <hr class="post-detail-divider">
 
-  <section class="post-body">
+  <section class="post-detail-body">
     {{ content }}
   </section>
 
-  <nav class="post-nav">
-    <div class="prev">
+  <nav class="post-detail-nav">
+    <div class="prev-post">
       {% if page.previous %}
-        <a href="{{ page.previous.url | relative_url }}" class="nav-link">← {{ page.previous.title }}</a>
+        <a href="{{ page.previous.url | relative_url }}" class="post-nav-link">← 上一篇：{{ page.previous.title }}</a>
       {% endif %}
     </div>
-    <div class="next">
+    <div class="next-post">
       {% if page.next %}
-        <a href="{{ page.next.url | relative_url }}" class="nav-link">{{ page.next.title }} →</a>
+        <a href="{{ page.next.url | relative_url }}" class="post-nav-link">下一篇：{{ page.next.title }} →</a>
       {% endif %}
     </div>
   </nav>

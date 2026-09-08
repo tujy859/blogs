@@ -1,21 +1,29 @@
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title and page.title != 'Home' %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <title>{% if page.title and page.title != 'Home' and page.title != '首页 / Home' %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <meta name="theme-color" content="#0ea5e9">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#f6f8fa">
   </head>
   <body data-page-url="{{ page.url }}">
     {% include header.html %}
 
-    <main class="container main-content">
-      {{ content }}
-    </main>
+    <div class="layout-wrapper">
+      <div class="layout-container">
+        <!-- Left Sidebar -->
+        {% include sidebar.html %}
+
+        <!-- Right Main Content Area -->
+        <main class="main-content-panel">
+          {{ content }}
+        </main>
+      </div>
+    </div>
 
     {% include footer.html %}
 

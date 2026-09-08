@@ -1,0 +1,61 @@
+<aside class="blog-sidebar">
+  <div class="sidebar-profile">
+    <div class="avatar-wrap">
+      <img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" class="sidebar-avatar" loading="lazy">
+    </div>
+    <h2 class="sidebar-name">{{ site.author.name }}</h2>
+    <div class="sidebar-tagline">🎓 Tsinghua BME Alumnus</div>
+    <p class="sidebar-bio">{{ site.author.bio }}</p>
+    
+    <div class="sidebar-contact">
+      <a href="mailto:{{ site.email }}" class="contact-item" title="Email">
+        <span class="contact-icon">✉️</span>
+        <span class="contact-text">{{ site.email }}</span>
+      </a>
+      <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer" class="contact-item" title="GitHub">
+        <span class="contact-icon">🐙</span>
+        <span class="contact-text">github.com/{{ site.github_username }}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-title">Navigation</div>
+    <a href="{{ '/' | relative_url }}" class="nav-link">
+      <span class="nav-icon">🏠</span> Home / 首页
+    </a>
+    <a href="{{ '/all-posts/' | relative_url }}" class="nav-link">
+      <span class="nav-icon">📝</span> All Posts / 全部博文 ({{ site.posts | size }})
+    </a>
+  </nav>
+
+  <div class="sidebar-widget stats-widget">
+    <div class="widget-title">Site Statistics</div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-num">{{ site.posts | size }}</span>
+        <span class="stat-label">Posts / 博文</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="site-visit-count">0</span>
+        <span class="stat-label">Visits / 总访问</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-widget tags-widget">
+    <div class="widget-title">Tags Cloud</div>
+    <div class="sidebar-tags">
+      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#基础模型</a>
+      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#智能手表</a>
+      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#PPG</a>
+      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#AI</a>
+      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#时间序列</a>
+      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#随笔</a>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <p>© {{ 'now' | date: "%Y" }} {{ site.author.name }}<br>Powered by Jekyll & GitHub</p>
+  </div>
+</aside>

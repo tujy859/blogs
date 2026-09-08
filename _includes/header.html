@@ -1,14 +1,16 @@
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="{{ '/' | relative_url }}">
-      <span class="brand-icon">⚡</span>
-      <span class="brand-text">{{ site.title }}</span>
-    </a>
-    <nav class="main-nav">
-      <a href="{{ '/' | relative_url }}" class="nav-item">首页 / Home</a>
-      <a href="{{ '/all-posts/' | relative_url }}" class="nav-item">全部文章</a>
-      <a href="{{ '/qixi/' | relative_url }}" class="nav-item nav-qixi-archive" title="2026 七夕专属浪漫纪念存档">七夕归档 🌌</a>
-      <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer" class="nav-item nav-external">GitHub ↗</a>
-    </nav>
+<header class="site-topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <a href="{{ '/' | relative_url }}" class="brand-link">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-text">{{ site.title }}</span>
+      </a>
+      <span class="topbar-tagline">· Biomedical Engineering & Wearable Health Algorithms</span>
+    </div>
+    <div class="topbar-links">
+      <a href="{{ '/' | relative_url }}" class="topbar-link">Home</a>
+      <a href="{{ '/all-posts/' | relative_url }}" class="topbar-link">All Posts ({{ site.posts | size }})</a>
+      <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer" class="topbar-link topbar-external">GitHub ↗</a>
+    </div>
   </div>
 </header>

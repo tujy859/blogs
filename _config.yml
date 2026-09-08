@@ -1,11 +1,20 @@
-name: Jinying's Blog
-title: Jinying's Blog
-description: "记录思考、技术实战与探索足迹 · Personal Tech Blog & Knowledge Base"
+name: Jinying Tu
+title: Jinying Tu
+description: "Tsinghua BME alumnus. Researching sports & health algorithms and physiological foundation models on smart wearables."
 baseurl: ""
 url: "https://tujinying.me"
 github_username: tujy859
+email: "tujy859@163.com"
 permalink: /:year/:month/:day/:title/
 future: true
+
+author:
+  name: "Jinying Tu"
+  email: "tujy859@163.com"
+  github: "tujy859"
+  avatar: "https://github.com/tujy859.png"
+  bio: "Tsinghua BME alumnus. Researching sports & health algorithms and physiological foundation models on smart wearables. Feel free to connect!"
+  education: "Tsinghua University (Biomedical Engineering)"
 
 # Plugins
 plugins:
@@ -29,9 +38,3 @@ exclude:
   - "vendor/bundle"
   - "Gemfile"
   - "Gemfile.lock"
-
-author:
-  name: "Jinying Tu"
-
-social:
-  github: "https://github.com/tujy859"
