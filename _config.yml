@@ -2,7 +2,7 @@ name: Jinying Tu
 title: Jinying Tu
 description: "Tsinghua BME alumnus. Researching sports & health algorithms and physiological foundation models on smart wearables."
 baseurl: ""
-url: "https://tujinying.me"
+url: "https://www.tujinying.me"
 github_username: tujy859
 email: "tujy859@163.com"
 permalink: /:year/:month/:day/:title/
