@@ -117,9 +117,14 @@ description: 深入剖析 CBPM-LLaMA、Time-LLM、GEM、PPG-LM、SensorLM 与 Ti
    依据生理学基本公式：
    - **平均动脉压（MAP）**：整个心动周期中动脉血压的平均值，主要由心输出量和外周阻力决定；
    - **脉压差（PP）**：$\text{PP} = \text{SBP} - \text{DBP}$，直接反映大动脉弹性贮器功能的强弱（与大动脉硬度和 PTT 紧密挂钩）。  
-     因此，提示词中显式约束模型：**利用 CO 和 PR 特征去推导 MAP，利用 PTT 和大动脉硬度特征去推导 PP**。在得到大模型预测出的 $\widehat{\text{MAP}}$ 与 $\widehat{\text{PP}}$ 之后，利用确定性的物理代数方程反解收缩压与舒张压：  
-     $\text{SBP} = \widehat{\text{MAP}} + \frac{2}{3}\widehat{\text{PP}}$  
-     $\text{DBP} = \widehat{\text{MAP}} - \frac{1}{3}\widehat{\text{PP}}$
+     因此，提示词中显式约束模型：**利用 CO 和 PR 特征去推导 MAP，利用 PTT 和大动脉硬度特征去推导 PP**。在得到大模型预测出的 $\widehat{\text{MAP}}$ 与 $\widehat{\text{PP}}$ 之后，利用确定性的物理代数方程反解收缩压与舒张压：
+
+     $$
+     \begin{aligned}
+     \text{SBP} &= \widehat{\text{MAP}} + \frac{2}{3}\widehat{\text{PP}} \\[6pt]
+     \text{DBP} &= \widehat{\text{MAP}} - \frac{1}{3}\widehat{\text{PP}}
+     \end{aligned}
+     $$
 
 ![CBPM-LLaMA 数据效率消融]({{ site.baseurl }}/assets/images/cbpm_sample_efficiency.png)
 
@@ -147,8 +152,12 @@ Monash 大学与蚂蚁集团发表在 ICLR 2024 的 **Time-LLM**（*Time Series 
 #### 核心设计要点
 
 1. **拒绝破坏语义流形**：直接微调一个 7B 大模型去预测时序，不仅显存开销极大，还很容易破坏模型在海量语料上建立的通用常识推理能力。Time-LLM 选择**完全冻结大语言模型的所有参数**；
-2. **文本原型（Text Prototypes）软组合**：从语言模型的词表中挑选出一批代表性词向量作为锚点。将连续时序通过 RevIN 标准化并切分成 Patch 向量后，利用 Multi-Head Cross-Attention，将每个时序 Patch 映射为文本原型的加权组合：  
-   $\widetilde{P} = \text{Softmax}\left(\frac{Q E'^T}{\sqrt{d}}\right) E'$  
+2. **文本原型（Text Prototypes）软组合**：从语言模型的词表中挑选出一批代表性词向量作为锚点。将连续时序通过 RevIN 标准化并切分成 Patch 向量后，利用 Multi-Head Cross-Attention，将每个时序 Patch 映射为文本原型的加权组合：
+
+   $$
+   \widetilde{P} = \text{Softmax}\left(\frac{Q E'^T}{\sqrt{d}}\right) E'
+   $$
+
    这在数学上保证了时序特征被投影在 LLM 预训练的合法语义流形内；
 3. **少样本泛化优势**：在少样本（Few-shot 5%～10% 训练集）测试中，Time-LLM 依靠大模型原生的通用关联推理能力，全面压制了从头开始训练的纯时序网络。
 

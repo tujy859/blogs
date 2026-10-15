@@ -37,7 +37,7 @@ description: 深入解析智能手表光电容积脉搏波（PPG）与加速度�
 
 ### 1.1 多速率与异构模态（Multi-Rate Heterogeneity）
 - **原始 PPG 信号（通常 25Hz ~ 100Hz）**：通过向皮下微血管发射特定波长光束（绿光/红外光）并检测漫反射光强的脉动变化。其波形蕴含着收缩峰（Systolic Peak）、重搏切迹（Dicrotic Notch）和舒张峰（Diastolic Peak）等丰富的微观血流动力学特征。
-- **原始 ACC 信号（通常 25Hz ~ 50Hz）**：测量人体肢体在三维空间中的加速度矢量 $(a_x, a_y, a_z)$，反映的是宏观骨骼肌肉的运动节奏。
+- **原始 ACC 信号（通常 25Hz ~ 50Hz）**：测量人体肢体在三维空间中的加速度矢量 $$(a_x, a_y, a_z)$$，反映的是宏观骨骼肌肉的运动节奏。
 - **派生生理指标**：心率（1Hz）、心率变异性（HRV, 窗口级）、睡眠分期（30秒/Epoch）。各数据源在采样频率、幅值量纲和物理意义上存在巨大代差。
 
 ### 1.2 频域碰撞（Spectral Collision）：经典算法的失效地带
@@ -186,12 +186,12 @@ mindmap
 
 ### 4.1 核心设计要素
 1. **统一物理时间窗口 Patch Tokenizer**：
-   不以“采样点数”分块，而是以“物理时间时长”（如 0.25 秒）对齐。PPG 16 点（64Hz）与 ACC 8 点（32Hz）经过独立 1D 卷积投影至相同的 $D=256$ 维 Token 隐空间，优雅化解采样率异构问题。
+   不以“采样点数”分块，而是以“物理时间时长”（如 0.25 秒）对齐。PPG 16 点（64Hz）与 ACC 8 点（32Hz）经过独立 1D 卷积投影至相同的 $$D=256$$ 维 Token 隐空间，优雅化解采样率异构问题。
 2. **三合一自监督预训练复合目标**：
    $$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{MAE}} + \lambda_1 \mathcal{L}_{\text{CrossModal}} + \lambda_2 \mathcal{L}_{\text{Spectral}}$$
-   - $\mathcal{L}_{\text{MAE}}$：随机掩码 50% 信号块重构局部波形；
-   - $\mathcal{L}_{\text{CrossModal}}$：利用 ACC 运动状态正样本对比拉近语义对齐；
-   - $\mathcal{L}_{\text{Spectral}}$：在频域对功率谱主频施加约束，强迫网络抑制运动谐波。
+   - $$\mathcal{L}_{\text{MAE}}$$：随机掩码 50% 信号块重构局部波形；
+   - $$\mathcal{L}_{\text{CrossModal}}$$：利用 ACC 运动状态正样本对比拉近语义对齐；
+   - $$\mathcal{L}_{\text{Spectral}}$$：在频域对功率谱主频施加约束，强迫网络抑制运动谐波。
 3. **即插即用的多任务下游微调头**：
    预训练完成后，冻结骨干网或微调，即可快速挂载心率回归（`HeartRateHead`）、步频计步（`StepCountHead`）与状态活动分类（`ActivityClassificationHead`）。
 

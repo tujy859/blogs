@@ -1433,3 +1433,25 @@ body.qixi-body .site-header {
   .post-item-meta { text-align: left; }
   .post-single { padding: 1.8rem 1.2rem; }
 }
+
+/* MathJax Mathematical Typography & Responsive Support */
+mjx-container[jax="SVG"] {
+  outline: none;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1.2em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 4px 0;
+}
+
+mjx-container[jax="SVG"]:not([display="true"]) {
+  display: inline-block;
+  margin: 0 0.15em;
+  vertical-align: -0.15em;
+}
+
