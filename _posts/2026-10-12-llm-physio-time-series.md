@@ -1,5 +1,6 @@
 ---
 layout: post
+featured: true
 title: 让大语言模型理解和赋能生理时序波形：从先验解耦、物理锚定到时序Agent终局
 date: 2026-10-12 16:50:00 +0800
 tags:

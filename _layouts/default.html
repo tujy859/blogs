@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title and page.title != 'Home' and page.title != '首页 / Home' %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    {% seo %}
     <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

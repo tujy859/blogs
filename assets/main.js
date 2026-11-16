@@ -317,3 +317,48 @@ function initReadCount() {
       console.warn('Total visit count sync failed.', err);
     });
 }
+
+
+/* Post TOC + image lightbox */
+document.addEventListener('DOMContentLoaded', function () {
+  var body = document.querySelector('.post-detail-body');
+  if (!body) return;
+
+  var heads = body.querySelectorAll('h2, h3');
+  if (heads.length >= 3) {
+    var list = document.createElement('ol');
+    heads.forEach(function (h, i) {
+      if (!h.id) h.id = 'sec-' + (i + 1);
+      var li = document.createElement('li');
+      if (h.tagName === 'H3') li.className = 'toc-h3';
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+    var toc = document.createElement('details');
+    toc.className = 'post-toc';
+    toc.open = heads.length <= 8;
+    var sum = document.createElement('summary');
+    sum.textContent = '目录';
+    toc.appendChild(sum);
+    toc.appendChild(list);
+    body.insertBefore(toc, body.firstChild);
+  }
+
+  body.querySelectorAll('img').forEach(function (img) {
+    img.addEventListener('click', function () {
+      var box = document.createElement('div');
+      box.className = 'img-lightbox';
+      var big = document.createElement('img');
+      big.src = img.currentSrc || img.src;
+      box.appendChild(big);
+      box.addEventListener('click', function () { box.remove(); });
+      document.addEventListener('keydown', function esc(e) {
+        if (e.key === 'Escape') { box.remove(); document.removeEventListener('keydown', esc); }
+      });
+      document.body.appendChild(box);
+    });
+  });
+});

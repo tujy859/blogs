@@ -874,7 +874,7 @@ img {
   }
 }
 
-me (Only active inside body.qixi-body) */
+/* 11. Qixi Theme (Only active inside body.qixi-body) */
 #starry-canvas {
   display: none;
 }
@@ -1455,3 +1455,51 @@ mjx-container[jax="SVG"]:not([display="true"]) {
   vertical-align: -0.15em;
 }
 
+
+
+/* ===== 12. Homepage refresh: featured + stream, TOC, lightbox ===== */
+.section-heading { font-size: 1rem; font-weight: 600; color: var(--text-secondary); margin: 4px 2px 12px; letter-spacing: .02em; }
+.featured-section { margin-bottom: 28px; }
+.featured-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.featured-card { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); text-decoration: none; color: inherit; transition: var(--transition); }
+.featured-card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-active); transform: translateY(-1px); }
+.featured-card h3 { margin: 0; font-size: 1.02rem; line-height: 1.45; color: var(--text-primary); }
+.featured-card p { margin: 0; font-size: .86rem; line-height: 1.6; color: var(--text-secondary); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.featured-kicker { font-size: .75rem; color: var(--text-muted); }
+.featured-project { grid-column: 1 / -1; border-left: 4px solid var(--link-color); background: linear-gradient(135deg, #f3f9ff 0%, #ffffff 60%); }
+.featured-project .featured-kicker { color: var(--link-color); font-weight: 600; }
+
+a.stream-post-item { display: block; text-decoration: none; color: inherit; }
+.stream-post-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0 0 6px; font-size: 1.08rem; color: var(--text-primary); }
+a.stream-post-item:hover .stream-post-title { color: var(--link-color); }
+.stream-post-excerpt { margin: 8px 0 0; font-size: .88rem; line-height: 1.65; color: var(--text-secondary); }
+
+.xhs-mark { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 3px; background: #ff2442; color: #fff; font-size: 10px; line-height: 1; font-weight: 700; }
+
+.post-detail-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.post-detail-nav .post-nav-link { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-md); text-decoration: none; line-height: 1.5; transition: var(--transition); }
+.post-detail-nav .post-nav-link:hover { border-color: var(--border-active); background: var(--bg-hover); }
+.post-detail-nav .nav-dir { font-size: .75rem; color: var(--text-muted); }
+.next-post { text-align: right; }
+
+.post-toc { margin: 0 0 24px; padding: 14px 18px; background: var(--bg-muted); border: 1px solid var(--border-light); border-radius: var(--radius-md); font-size: .88rem; }
+.post-toc summary { cursor: pointer; font-weight: 600; color: var(--text-secondary); }
+.post-toc ol { margin: 10px 0 0; padding-left: 1.2em; }
+.post-toc li { margin: 4px 0; line-height: 1.5; }
+.post-toc li.toc-h3 { margin-left: 1.2em; list-style-type: circle; }
+.post-toc a { color: var(--text-primary); text-decoration: none; }
+.post-toc a:hover { color: var(--link-color); }
+
+.post-detail-body img { cursor: zoom-in; max-width: 100%; height: auto; }
+.img-lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.82); display: flex; align-items: center; justify-content: center; cursor: zoom-out; padding: 16px; }
+.img-lightbox img { max-width: 96vw; max-height: 94vh; background: #fff; border-radius: 6px; }
+
+@media (max-width: 880px) {
+  .featured-grid { grid-template-columns: 1fr; }
+  .blog-sidebar { padding: 14px 16px; }
+  .sidebar-profile { text-align: left; }
+  .blog-sidebar .avatar-wrap { transform: scale(.6); transform-origin: left top; height: 56px; margin-bottom: 0; }
+  .blog-sidebar .stats-widget { display: none; }
+  .post-detail-nav { grid-template-columns: 1fr; }
+  .next-post { text-align: left; }
+}

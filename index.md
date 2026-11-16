@@ -3,73 +3,42 @@ layout: default
 title: Home
 ---
 
-<div class="content-panel-header">
-  <h1 class="content-panel-title">📝 Recent Posts / 博客随笔</h1>
-  <p class="content-panel-desc">记录技术调研、可穿戴健康算法、AI 基础模型与工程探索</p>
-</div>
+<section class="featured-section">
+  <h2 class="section-heading">代表作</h2>
+  <div class="featured-grid">
+    <a class="featured-card featured-project" href="https://tujy859.github.io/Wearable-Physiological-Foundation-Models/" target="_blank" rel="noopener noreferrer">
+      <span class="featured-kicker">开源项目 ↗</span>
+      <h3>可穿戴与生理基础模型 · 研究索引</h3>
+      <p>检索可穿戴与生理时序基础模型、评测基准和数据集，查阅论文、代码、权重与专题文章。</p>
+    </a>
+    {% assign featured_posts = site.posts | where: "featured", true %}
+    {% for post in featured_posts %}
+    <a class="featured-card" href="{{ post.url | relative_url }}">
+      <span class="featured-kicker">{{ post.date | date: "%Y-%m-%d" }} · 长文</span>
+      <h3>{{ post.title | split: "：" | first }}</h3>
+      <p>{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 70 }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>
 
-<div class="posts-list-stream">
-  {% assign pinned_posts = site.posts | where: "pinned", true %}
-  {% for post in pinned_posts %}
-    <article class="stream-post-item stream-post-pinned">
-      <div class="post-item-heading">
-        <h2 class="stream-post-title">
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </h2>
-        <span class="stream-badge-featured">📌 置顶推荐</span>
-      </div>
-
+<section class="posts-section">
+  <h2 class="section-heading">最新文章</h2>
+  <div class="posts-list-stream">
+    {% for post in site.posts %}
+    <a class="stream-post-item" href="{{ post.url | relative_url }}">
+      <h3 class="stream-post-title">{{ post.title }}</h3>
       <div class="stream-post-meta">
-        <span class="meta-date">📅 {{ post.date | date: "%Y-%m-%d" }}</span>
+        <span class="meta-date">{{ post.date | date: "%Y-%m-%d" }}</span>
         {% if post.tags %}
-          <span class="meta-sep">·</span>
-          <span class="meta-tags">
-            {% for tag in post.tags limit:4 %}
-              <span class="tag-pill">#{{ tag }}</span>
-            {% endfor %}
-          </span>
+        <span class="meta-sep">·</span>
+        <span class="meta-tags">
+          {% for tag in post.tags limit:3 %}<span class="tag-pill">#{{ tag }}</span>{% endfor %}
+        </span>
         {% endif %}
       </div>
-
-      <div class="stream-post-excerpt">
-        <p>{{ post.description | default: post.excerpt | strip_html | truncate: 160 }}</p>
-      </div>
-
-      <div class="stream-post-footer">
-        <a href="{{ post.url | relative_url }}" class="read-more-link">阅读全文 (Read More) →</a>
-      </div>
-    </article>
-  {% endfor %}
-
-  {% for post in site.posts %}
-    {% unless post.pinned %}
-      <article class="stream-post-item">
-        <div class="post-item-heading">
-          <h2 class="stream-post-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h2>
-        </div>
-
-        <div class="stream-post-meta">
-          <span class="meta-date">📅 {{ post.date | date: "%Y-%m-%d" }}</span>
-          {% if post.tags %}
-            <span class="meta-sep">·</span>
-            <span class="meta-tags">
-              {% for tag in post.tags limit:4 %}
-                <span class="tag-pill">#{{ tag }}</span>
-              {% endfor %}
-            </span>
-          {% endif %}
-        </div>
-
-        <div class="stream-post-excerpt">
-          <p>{{ post.description | default: post.excerpt | strip_html | truncate: 160 }}</p>
-        </div>
-
-        <div class="stream-post-footer">
-          <a href="{{ post.url | relative_url }}" class="read-more-link">阅读全文 (Read More) →</a>
-        </div>
-      </article>
-    {% endunless %}
-  {% endfor %}
-</div>
+      <p class="stream-post-excerpt">{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 100 }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>

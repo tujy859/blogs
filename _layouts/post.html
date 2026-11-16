@@ -6,11 +6,10 @@ layout: default
   <header class="post-detail-header">
     <h1 class="post-detail-title">{{ page.title }}</h1>
     <div class="post-detail-meta">
-      <span class="meta-item"><span class="meta-icon">📅</span> {{ page.date | date: "%Y-%m-%d" }}</span>
-      <span class="meta-item"><span class="meta-icon">👤</span> {{ page.author | default: site.author.name }}</span>
+      <span class="meta-item">{{ page.date | date: "%Y-%m-%d" }}</span>
+      <span class="meta-item">约 {{ content | strip_html | size | divided_by: 400 | plus: 1 }} 分钟阅读</span>
       {% if page.tags %}
         <span class="meta-item meta-tags">
-          <span class="meta-icon">🏷️</span>
           {% for tag in page.tags %}
             <span class="post-tag-item">#{{ tag }}</span>
           {% endfor %}
@@ -28,12 +27,12 @@ layout: default
   <nav class="post-detail-nav">
     <div class="prev-post">
       {% if page.previous %}
-        <a href="{{ page.previous.url | relative_url }}" class="post-nav-link">← 上一篇：{{ page.previous.title }}</a>
+        <a href="{{ page.previous.url | relative_url }}" class="post-nav-link"><span class="nav-dir">← 上一篇</span>{{ page.previous.title }}</a>
       {% endif %}
     </div>
     <div class="next-post">
       {% if page.next %}
-        <a href="{{ page.next.url | relative_url }}" class="post-nav-link">下一篇：{{ page.next.title }} →</a>
+        <a href="{{ page.next.url | relative_url }}" class="post-nav-link"><span class="nav-dir">下一篇 →</span>{{ page.next.title }}</a>
       {% endif %}
     </div>
   </nav>

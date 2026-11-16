@@ -1,15 +1,14 @@
 <aside class="blog-sidebar">
   <div class="sidebar-profile">
     <div class="avatar-wrap">
-      <img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" class="sidebar-avatar" loading="lazy">
+      <img src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}" class="sidebar-avatar" loading="lazy">
     </div>
     <h2 class="sidebar-name">{{ site.author.name }}</h2>
-    <div class="sidebar-tagline">🎓 Tsinghua BME Alumnus</div>
     <p class="sidebar-bio">{{ site.author.bio }}</p>
-    
+
     <div class="sidebar-contact">
       <a href="mailto:{{ site.email }}" class="contact-item" title="Email">
-        <span class="contact-icon">✉️</span>
+        <span class="contact-icon"><svg height="15" width="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
         <span class="contact-text">{{ site.email }}</span>
       </a>
       <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer" class="contact-item" title="GitHub">
@@ -17,49 +16,22 @@
         <span class="contact-text">github.com/{{ site.github_username }}</span>
       </a>
       <a href="https://www.xiaohongshu.com/search_result?keyword=%E7%82%B9%E7%82%B9%E5%B1%85" target="_blank" rel="noopener noreferrer" class="contact-item" title="在小红书关注 点点居">
-        <span class="contact-icon">📕</span>
-        <span class="contact-text">小红书: 点点居</span>
+        <span class="contact-icon"><span class="xhs-mark">书</span></span>
+        <span class="contact-text">小红书：点点居</span>
       </a>
     </div>
   </div>
 
-  <nav class="sidebar-nav">
-    <div class="nav-section-title">Navigation</div>
-    <a href="{{ '/' | relative_url }}" class="nav-link">
-      <span class="nav-icon">🏠</span> Home / 首页
-    </a>
-    <a href="{{ '/all-posts/' | relative_url }}" class="nav-link">
-      <span class="nav-icon">📝</span> All Posts / 全部博文 ({{ site.posts | size }})
-    </a>
-  </nav>
-
   <div class="sidebar-widget stats-widget">
-    <div class="widget-title">Site Statistics</div>
     <div class="stats-grid">
       <div class="stat-box">
         <span class="stat-num">{{ site.posts | size }}</span>
-        <span class="stat-label">Posts / 博文</span>
+        <span class="stat-label">篇文章</span>
       </div>
       <div class="stat-box">
-        <span class="stat-num" id="site-visit-count">0</span>
-        <span class="stat-label">Visits / 总访问</span>
+        <span class="stat-num" id="site-visit-count">—</span>
+        <span class="stat-label">总访问</span>
       </div>
     </div>
-  </div>
-
-  <div class="sidebar-widget tags-widget">
-    <div class="widget-title">Tags Cloud</div>
-    <div class="sidebar-tags">
-      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#基础模型</a>
-      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#智能手表</a>
-      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#PPG</a>
-      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#AI</a>
-      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#时间序列</a>
-      <a href="{{ '/all-posts/' | relative_url }}" class="sidebar-tag">#随笔</a>
-    </div>
-  </div>
-
-  <div class="sidebar-footer">
-    <p>© {{ 'now' | date: "%Y" }} {{ site.author.name }}<br>Powered by Jekyll & GitHub</p>
   </div>
 </aside>

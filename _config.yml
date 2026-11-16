@@ -1,8 +1,9 @@
 name: Jinying Tu
 title: Jinying Tu
-description: "Tsinghua BME alumnus. Researching sports & health algorithms and physiological foundation models on smart wearables."
+description: "清华大学生物医学工程学院毕业，从事智能穿戴设备的运动健康算法与生理信号大模型研发。"
 baseurl: ""
 url: "https://www.tujinying.me"
+lang: zh-CN
 github_username: tujy859
 email: "tujy859@163.com"
 permalink: /:year/:month/:day/:title/
@@ -12,13 +13,12 @@ author:
   name: "Jinying Tu"
   email: "tujy859@163.com"
   github: "tujy859"
-  avatar: "https://github.com/tujy859.png"
-  bio: "Tsinghua BME alumnus. Researching sports & health algorithms and physiological foundation models on smart wearables. Feel free to connect!"
+  avatar: "/assets/images/avatar.jpg"
+  bio: "毕业于清华大学生物医学工程学院，从事智能穿戴设备的运动健康算法与生理信号大模型研发。"
   education: "Tsinghua University (Biomedical Engineering)"
 
 # Plugins
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
 
