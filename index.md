@@ -8,7 +8,7 @@ title: Home
   <div class="featured-grid">
     <a class="featured-card featured-project" href="https://tujy859.github.io/Wearable-Physiological-Foundation-Models/" target="_blank" rel="noopener noreferrer">
       <div class="featured-card-header">
-        <h3>可穿戴与生理基础模型</h3>
+        <h3>可穿戴生理信号基础模型</h3>
         <span class="featured-kicker">专题网站 ↗</span>
       </div>
       <p>检索可穿戴与生理时序基础模型、评测基准和数据集，查阅论文、代码、权重与专题文章。</p>
